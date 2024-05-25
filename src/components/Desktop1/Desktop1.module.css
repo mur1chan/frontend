@@ -1,0 +1,131 @@
+.root {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: #eff1f5;
+  overflow: hidden;
+}
+.submitButtonDiv {
+  position: absolute;
+  left: 98px;
+  top: 668.2909px;
+  width: 97.9745px;
+  height: 35.7475px;
+  border-radius: 6px;
+  background-color: #40a02b;
+}
+.submit {
+  color: #4c4f69;
+  font-size: 16px;
+  font-family: Open Sans, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
+  position: absolute;
+  left: 98px;
+  top: 673.5868px;
+  width: 97.9745px;
+  height: 25.1556px;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+}
+.h1 {
+  color: #4c4f69;
+  font-size: 40px;
+  font-weight: bold;
+  font-family: Open Sans, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
+  position: absolute;
+  left: 98px;
+  top: 332px;
+  width: 325.699px;
+  height: 59.5791px;
+  flex-direction: column;
+}
+.h2 {
+  color: #5c5f77;
+  font-size: 32px;
+  font-family: Open Sans, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
+  position: absolute;
+  left: 98px;
+  top: 411.4388px;
+  width: 444.8571px;
+  height: 46.3393px;
+  flex-direction: column;
+}
+.inputDiv {
+  position: absolute;
+  left: 98px;
+  top: 476.3138px;
+  width: 519px;
+  height: 64.875px;
+  outline: solid 2px #dce0e8;
+  border-radius: 4px;
+  background-color: #ccd0da;
+}
+.inputDiv2 {
+  position: absolute;
+  left: 98px;
+  top: 561.0485px;
+  width: 519px;
+  height: 64.875px;
+  outline: solid 2px #dce0e8;
+  border-radius: 4px;
+  background-color: #ccd0da;
+}
+.inputField {
+  color: #6c6f85;
+  font-size: 24px;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
+  position: absolute;
+  left: 107.2679px;
+  top: 498.8215px;
+  width: 500.4643px;
+  height: 39.7194px;
+  flex-direction: column;
+}
+.inputField2 {
+  color: #6c6f85;
+  font-size: 24px;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
+  position: absolute;
+  left: 107.2679px;
+  top: 580.9082px;
+  width: 500.4643px;
+  height: 39.7194px;
+  flex-direction: column;
+}
+.rectangle2 {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 1920px;
+  height: 130px;
+  background-color: #e6e9ef;
+}
+.menuButton {
+  position: absolute;
+  right: 34px;
+  top: 42px;
+  width: 56px;
+  height: 46px;
+}
+.icon {
+  width: 100%;
+  height: 100%;
+}
+.mingcuteScienceLine {
+  position: absolute;
+  left: 26px;
+  top: 24px;
+  width: 82px;
+  height: 83px;
+}
+.icon2 {
+  width: 100%;
+  height: 100%;
+}
