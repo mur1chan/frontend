@@ -12,6 +12,6 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 def index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
-@app.post("/add-item")
-def add_item(request: Request):
-    return templates.TemplateResponse("partials/item.html", {"request": request})
+@app.get("/register", response_class=HTMLResponse)
+def register():
+    pass
