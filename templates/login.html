@@ -1,0 +1,45 @@
+<!-- templates/login.html -->
+{% extends 'base.html' %} {% block title %}Home{% endblock %} {% block content
+%}
+<div
+  style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; */
+  "
+>
+  <main style="max-width: 600px; padding: 1em; border: 1px solid #ccc">
+    <form hx-post="/submit" hx-target="body" hx-swap="outerHTML">
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        aria-label="Email"
+        autocomplete="email"
+        required
+        style="width: 100%; margin-bottom: 1em"
+      />
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        aria-label="Password"
+        required
+        style="width: 100%; margin-bottom: 1em"
+      />
+      <label style="display: block; margin-bottom: 1em">
+        <input type="checkbox" name="placeholder" />
+        Lorem Ipsum unchecked
+      </label>
+      <label style="display: block; margin-bottom: 1em">
+        <input type="checkbox" name="placeholder" checked />
+        Lorem Ipsum checked
+      </label>
+      <hr />
+      <p><a href="/register">Noch kein Account?</a></p>
+      <button type="submit" style="width: 100%">Login</button>
+    </form>
+  </main>
+</div>
+{% endblock %}

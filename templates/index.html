@@ -1,0 +1,46 @@
+<!-- templates/index.html -->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div style="display: flex; align-items: flex-start;">
+  <main style="max-width: 600px; margin-left: 0; margin-right: auto; padding: 1em; border: 1px solid #ccc;">
+    <form hx-post="/submit" hx-target="body" hx-swap="outerHTML">
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        aria-label="Email"
+        autocomplete="email"
+        required
+      />
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        aria-label="Password"
+        required
+      />
+      <label>
+        <input type="checkbox" name="placeholder" />
+        Lorem Ipsum unchecked
+      </label>
+      <label>
+        <input type="checkbox" name="placeholder" checked />
+        Lorem Ipsum checked
+      </label>
+      <hr />
+      <p>Noch kein Account?</p>
+      <button type="submit">Registrieren</button>
+    </form>
+  </main>
+  <figure style="margin-left: 1em;">
+    <img
+      src="https://raw.githubusercontent.com/picocss/examples/master/v2-html-classless/img/aleksandar-jason-a562ZEFKW8I-unsplash-2000x1000.jpg"
+      alt="Minimal landscape"
+      style="max-width: 100%; height: auto; max-height: 400px;"
+    />
+  </figure>
+</div>
+{% endblock %}
