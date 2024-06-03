@@ -1,0 +1,47 @@
+/* styles.css */
+
+/* Ausrichtung für kleinere Bildschirme */
+@media (max-width: 768px) {
+  #item-list {
+    text-align: center;
+  }
+}
+.flex-container {
+  display: flex;
+  align-items: flex-start;
+}
+
+/* Container-Stil */
+.custom-container {
+  max-width: 600px; /* Breite des Containers */
+  margin-left: 0; /* Links ausgerichtet */
+  margin-right: auto; /* Rechts automatisch */
+  padding: 1em;
+  border: 1px solid #ccc; /* Optional: Rand für Rechteck */
+}
+
+/* Bild-Stil */
+.custom-image {
+  max-width: 100%; /* Bildbreite auf 100% des Containers begrenzen */
+  height: auto; /* Höhe automatisch anpassen */
+  max-height: 400px; /* Optionale maximale Höhe */
+  margin-left: 1em; /* Abstand zum Container */
+}
+
+/* Zentrierter Container für kleinere Bildschirme */
+@media (max-width: 768px) {
+  .flex-container {
+    flex-direction: column;
+  }
+
+  .custom-container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .custom-image {
+    margin-left: 0;
+    margin-top: 1em;
+    max-height: 200px; /* Optionale maximale Höhe für kleinere Bildschirme */
+  }
+}
