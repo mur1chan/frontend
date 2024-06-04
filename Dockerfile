@@ -20,4 +20,4 @@ RUN git clone https://github.com/mur1chan/frontend.git . && \
 EXPOSE 3948
 
 # Pull the latest code and run the application
-CMD git pull && .venv/bin/uvicorn main:app --host 0.0.0.0 --port 3948
+CMD git pull && .venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 3948
