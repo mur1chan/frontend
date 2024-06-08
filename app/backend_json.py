@@ -17,7 +17,32 @@ def save_json(json_name: str, data: Dict):
 
 def register_user(email: str, password: str) -> bool:
     register_dict = load_json("users.json")
-    new_index = len(register_dict)
+
+    # Check if the email already exists in the register_dict
+    for user_index, user_data in register_dict.items():
+        print(f'checking {user_data["email"]} with loaded {email}')
+        if user_data["email"] == email:
+            print(f'{user_data["email"]} already registered')
+            return False
+
+    # If the email does not exist, add the new user
+    new_index = str(len(register_dict))
     register_dict[new_index] = {"email": email, "password": password}
-    save_json(json_name="users.json", data=register_dict)
+    save_json("users.json", register_dict)
+    print(f"{email} registered successfully")
     return True
+
+
+def login_user(email: str, password: str) -> bool:
+    users_dict = load_json("users.json")
+    max_register_dict = len(users_dict)
+
+    for user_index in range(0, max_register_dict):
+        user_dict = users_dict[str(user_index)]
+        if user_dict["email"] == email and user_dict["password"] == password:
+            break
+        return True
+    return False
+
+
+login_user("a", "a")

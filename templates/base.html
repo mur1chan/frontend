@@ -10,10 +10,10 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.sand.min.css"
     />
+    <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/response-targets.js"></script>
     <script src="https://unpkg.com/htmx.org"></script>
   </head>
   <body>
-    {% include '/components/header_home.html' %}
     <main class="container" max-width="600px" margin-left="0" margin-right="auto" padding="1em" border="1px solid #ccc">{% block content %}{% endblock %}</main>
   </body>
 </html>

@@ -1,6 +1,7 @@
 from pathlib import Path
+from typing import Optional
 
-from fastapi import FastAPI, Form, Request
+from fastapi import FastAPI, Form, Header, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -17,12 +18,22 @@ def index(request: Request):
 
 
 @app.post("/submit", response_class=HTMLResponse)
-async def submit(request: Request, email: str = Form(str), password: str = Form(str)):
-    # Hier können Sie die Logik zur Verarbeitung der E-Mail und des Passworts hinzufügen
-    # Zum Beispiel, die Daten speichern oder eine Bestätigungs-E-Mail senden
+async def submit(
+    request: Request,
+    email: str = Form(...),
+    password: str = Form(...),
+    hx_request: Optional["str"] = Header(None),
+):
     register_new_user = register_user(email=email, password=password)
-    if register_user:
-        return RedirectResponse(url=f"/confirm_email?email={email}", status_code=303)
+    if register_new_user:
+        if hx_request:
+            return RedirectResponse(
+                url=f"/confirm_email?email={email}", status_code=303
+            )
+    else:
+        return templates.TemplateResponse(
+            "/components/error_register.html", {"request": request}
+        )
 
 
 @app.get("/confirm_email", response_class=HTMLResponse)

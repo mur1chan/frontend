@@ -1,16 +1,14 @@
 <!-- templates/login.html -->
-{% extends 'base.html' %} {% block title %}Home{% endblock %} {% block content
-%}
-<div
-  style="
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* height: 100vh; */
-  "
->
+{% include "/components/header.html" %}
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %} 
+{% block content %}
+
+<div hx-ext="response-targets" style="display: flex; justify-content: center; align-items: center;">
+<div id="success-message">
   <main style="max-width: 600px; padding: 1em; border: 1px solid #ccc">
-    <form hx-post="/submit" hx-target="body" hx-swap="outerHTML">
+    <form hx-post="/submit" hx-target="#success-message" hx-target-400="#error-message">
+
       <input
         type="email"
         name="email"
@@ -39,7 +37,9 @@
       <hr />
       <p><a href="/register">Noch kein Account?</a></p>
       <button type="submit" style="width: 100%">Registrieren</button>
+      <div id="error-message"></div>
     </form>
   </main>
+</div>
 </div>
 {% endblock %}
