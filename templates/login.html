@@ -51,7 +51,7 @@
 
       if (response.ok) {
         // Weiterleitung auf die Home-Seite, falls der Login erfolgreich ist
-        window.location.href = "/home";
+        window.location.href = "/profile";
       } else {
         const errorMessage = await response.text();
         showMessage(errorMessage, "red");
