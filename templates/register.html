@@ -1,10 +1,11 @@
 <!-- templates/register.html -->
+{% include "/components/header.html" %}
 {% extends 'base.html' %}
 {% block title %}Registration{% endblock %}
 {% block content %}
-<div hx-ext="response-targets" style="display: flex; justify-content: center; align-items: center;">
+<div style="display: flex; justify-content: center; align-items: center;">
   <main style="max-width: 600px; padding: 1em; border: 1px solid #ccc">
-    <form hx-post="/submit" hx-target="#success-message" hx-target-400="#error-message">
+    <form id="register-form">
       <input
         type="email"
         name="email"
@@ -32,10 +33,40 @@
       </label>
       <hr />
       <p><a href="/register">Noch kein Account?</a></p>
-      <button type="submit" style="width: 100%">Registrieren</button>
-      <div id="success-message"></div>
-      <div id="error-message"></div>
+      <button type="button" style="width: 100%" onclick="registerUser()">Registrieren</button>
+      <div id="message" style="margin-top: 0.5em;"></div>
     </form>
   </main>
 </div>
+<!-- Am Ende der HTML-Seite -->
+<script>
+  async function registerUser() {
+    const form = document.getElementById("register-form");
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      if (response.ok) {
+        const email = formData.get("email");
+        window.location.href = `/confirm_email?email=${email}`;
+      } else {
+        const errorMessage = await response.text();
+        showMessage(errorMessage, "red");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      showMessage("An error occurred. Please try again later.", "red");
+    }
+  }
+
+  function showMessage(message, color) {
+    const messageDiv = document.getElementById("message");
+    messageDiv.textContent = message;
+    messageDiv.style.color = color;
+  }
+</script>
 {% endblock %}

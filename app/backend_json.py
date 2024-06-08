@@ -40,9 +40,8 @@ def login_user(email: str, password: str) -> bool:
     for user_index in range(0, max_register_dict):
         user_dict = users_dict[str(user_index)]
         if user_dict["email"] == email and user_dict["password"] == password:
-            break
-        return True
-    return False
+            return True  # Wenn Benutzer gefunden wurde, ist die Anmeldung erfolgreich
+    return False  # Ansonsten ist die Anmeldung fehlgeschlagen
 
 
 login_user("a", "a")

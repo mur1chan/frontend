@@ -1,17 +1,10 @@
-<!-- templates/login.html -->
 {% include "/components/header.html" %}
 {% extends 'base.html' %}
-{% block title %}Home{% endblock %} {% block content%}
-{% include '/components/header.html' %}
-{% extends 'base.html' %}
-{% block title %}Login{% endblock %}
-{% block content %}
-<div id="success-message">
-
-<div hx-ext="response-targets" style="display: flex; justify-content: center; align-items: center;">
+{% block title %}Login{% endblock %} {% block content %}
+<div id="success-message"></div>
+<div style="display: flex; justify-content: center; align-items: center;">
   <main style="max-width: 600px; padding: 1em; border: 1px solid #ccc">
-    <form hx-post="/submit" hx-target="#success-message" hx-target-400="#error-message">
-
+    <form id="login-form">
       <input
         type="email"
         name="email"
@@ -39,10 +32,40 @@
       </label>
       <hr />
       <p><a href="/register">Noch kein Account?</a></p>
-      <button type="submit_registration" style="width: 100%">Registrieren</button>
-      <div id="error-message"></div>
+      <button type="button" style="width: 100%" onclick="loginUser()">Login</button>
+      <div id="error-message" style="margin-top: 0.5em;"></div>
     </form>
   </main>
 </div>
-</div>
+<!-- Am Ende der HTML-Seite -->
+<script>
+  async function loginUser() {
+    const form = document.getElementById("login-form");
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("/submit_login", {
+        method: "POST",
+        body: formData
+      });
+
+      if (response.ok) {
+        // Weiterleitung auf die Home-Seite, falls der Login erfolgreich ist
+        window.location.href = "/home";
+      } else {
+        const errorMessage = await response.text();
+        showMessage(errorMessage, "red");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      showMessage("An error occurred. Please try again later.", "red");
+    }
+  }
+
+  function showMessage(message, color) {
+    const messageDiv = document.getElementById("error-message");
+    messageDiv.textContent = message;
+    messageDiv.style.color = color;
+  }
+</script>
 {% endblock %}

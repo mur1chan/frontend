@@ -6,7 +6,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from app.backend_json import register_user
+from app.backend_json import login_user, register_user
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
@@ -28,14 +28,38 @@ async def submit(
     register_new_user = register_user(email=email, password=password)
     if register_new_user:
         print("User registered successfully.")
-        return RedirectResponse(
-            url=f"/confirm_email?email={email}", status_code=303
-        )
+        if hx_request:
+            return RedirectResponse(
+                url=f"/confirm_email?email={email}", status_code=303
+            )
+        else:
+            return HTMLResponse(
+                content="Registration successful. Check your email.", status_code=200
+            )
     else:
         print("User registration failed.")
-        return templates.TemplateResponse(
-            "components/error_register.html", {"request": request}, status_code=400
+        return HTMLResponse(
+            content="There is already a user with this email.", status_code=400
         )
+
+
+@app.post("/submit_login", response_class=HTMLResponse)
+async def submit_login(
+    request: Request,
+    email: str = Form(...),
+    password: str = Form(...),
+    hx_request: Optional[str] = Header(None),
+):
+    print(f"Received email: {email}, password: {password}")
+    login_successful = login_user(email=email, password=password)
+    print(f"login is {login_successful}")
+    if login_successful == True:
+        print("Login successful.")
+        return HTMLResponse(content="Login successful.", status_code=200)
+    elif login_successful == False:
+        print("Login failed.")
+        return HTMLResponse(content="Invalid email or password.", status_code=400)
+
 
 @app.get("/login", response_class=HTMLResponse)
 async def login(request: Request):
@@ -50,3 +74,11 @@ async def register(request: Request):
 @app.get("/home", response_class=HTMLResponse)
 async def home(request: Request):
     return templates.TemplateResponse("home.html", {"request": request})
+
+
+@app.get("/confirm_email", response_class=HTMLResponse)
+async def confirm_email(request: Request, email: str):
+    # Rendern Sie die Bestätigungsseite und geben Sie die E-Mail-Adresse an das Template weiter
+    return templates.TemplateResponse(
+        "confirmation.html", {"request": request, "email": email}
+    )
