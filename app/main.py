@@ -22,26 +22,20 @@ async def submit(
     request: Request,
     email: str = Form(...),
     password: str = Form(...),
-    hx_request: Optional["str"] = Header(None),
+    hx_request: Optional[str] = Header(None),
 ):
+    print(f"Received email: {email}, password: {password}")
     register_new_user = register_user(email=email, password=password)
     if register_new_user:
-        if hx_request:
-            return RedirectResponse(
-                url=f"/confirm_email?email={email}", status_code=303
-            )
-    else:
-        return templates.TemplateResponse(
-            "/components/error_register.html", {"request": request}
+        print("User registered successfully.")
+        return RedirectResponse(
+            url=f"/confirm_email?email={email}", status_code=303
         )
-
-
-@app.get("/confirm_email", response_class=HTMLResponse)
-async def confirm_email(request: Request, email: str):
-    return templates.TemplateResponse(
-        "confirmation.html", {"request": request, "email": email}
-    )
-
+    else:
+        print("User registration failed.")
+        return templates.TemplateResponse(
+            "components/error_register.html", {"request": request}, status_code=400
+        )
 
 @app.get("/login", response_class=HTMLResponse)
 async def login(request: Request):
