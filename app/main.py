@@ -82,3 +82,7 @@ async def confirm_email(request: Request, email: str):
     return templates.TemplateResponse(
         "confirmation.html", {"request": request, "email": email}
     )
+
+@app.get("/profile", response_class=HTMLResponse)
+async def profile(request: Request):
+    return templates.TemplateResponse("profile.html", {"request": request})
