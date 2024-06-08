@@ -1,14 +1,11 @@
-<!-- templates/login.html -->
-{% include "/components/header.html" %}
+<!-- templates/register.html -->
 {% extends 'base.html' %}
-{% block title %}Home{% endblock %} 
+{% block title %}Registration{% endblock %}
 {% block content %}
-
 <div hx-ext="response-targets" style="display: flex; justify-content: center; align-items: center;">
-<div id="success-message">
+  <div id="success-message">
   <main style="max-width: 600px; padding: 1em; border: 1px solid #ccc">
     <form hx-post="/submit" hx-target="#success-message" hx-target-400="#error-message">
-
       <input
         type="email"
         name="email"
@@ -40,6 +37,6 @@
       <div id="error-message"></div>
     </form>
   </main>
-</div>
+  </div>
 </div>
 {% endblock %}
