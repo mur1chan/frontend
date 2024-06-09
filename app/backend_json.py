@@ -44,4 +44,6 @@ def login_user(email: str, password: str) -> bool:
     return False  # Ansonsten ist die Anmeldung fehlgeschlagen
 
 
-login_user("a", "a")
+def return_article():
+    articles_dict = load_json("articles.json")
+    return articles_dict["0"]

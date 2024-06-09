@@ -1,0 +1,14 @@
+<!-- templates/test_publication.html -->
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+<div>
+  <h1>{{ title }}</h1>
+  <p>Autor(en): {{ authors }}</p>
+  <p>Zusammenfassung: {{ abstract }}</p>
+</div>
+{% endblock %}
