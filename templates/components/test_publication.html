@@ -1,14 +1,21 @@
 <!-- templates/components/test_publication.html -->
 {% extends 'base.html' %}
 
-{% block title %}
+<!--{% block title %}
     {{ title }}
-{% endblock %}
+{% endblock %}-->
 
 {% block content %}
-<div>
-  <h1>{{ title }}</h1>
-  <p>Autor(en): {{ authors }}</p>
-  <p>Zusammenfassung: {{ abstract }}</p>
-</div>
+<article id="article">
+  <h3>{{ title }}</h3>
+  <p><em>Autoren: {{ authors }}</em></p>
+  <blockquote>
+    "AUSZUG:{{ abstract }}"
+  </blockquote>
+  <p><a href="#" onclick="event.preventDefault()"><small><strong>Leseliste Hinzufügen</strong></small></a></p>
+  <footer>
+    <small>Duis nec elit placerat, suscipit nibh quis, finibus neque.</small>
+  </footer>
+</article>
 {% endblock %}
+
