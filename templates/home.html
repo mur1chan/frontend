@@ -5,36 +5,10 @@
 {% include "/components/header_home.html" %}
 <div style="display: flex; height: 100vh; align-items: stretch;">
   <div style="flex: 1; padding: 20px; display: flex; align-items: start; justify-content: center;  height: 100%;">
-    <div style="width: 100%; height: 300px; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center;">
-      <article aria-busy="true"></article>
-    </div>
-    <div>
-      <p>test</p>
-    </div>
   </div>
   <div style="flex: 2; margin: 0 20px; display: flex; flex-direction: column; height: 100%;">
-    <div style="flex: 1; display: flex; flex-direction: column; height: 100%;">
-      <h2>Name</h2>
-      <p>Institution</p>
-      <p>Bereich</p>
-      <hr>
-      <div class="grid">
-        <img
-          src="https://raw.githubusercontent.com/picocss/examples/master/v2-html-classless/img/aleksandar-jason-a562ZEFKW8I-unsplash-2000x1000.jpg"
-          alt="Minimal landscape"
-          style="max-width: 100%; height: auto; max-height: 400px; width: auto;"
-        />
-        <img
-          src="https://raw.githubusercontent.com/picocss/examples/master/v2-html-classless/img/aleksandar-jason-a562ZEFKW8I-unsplash-2000x1000.jpg"
-          alt="Minimal landscape"
-          style="max-width: 100%; height: auto; max-height: 400px; width: auto;"
-        />
-        <img
-          src="https://raw.githubusercontent.com/picocss/examples/master/v2-html-classless/img/aleksandar-jason-a562ZEFKW8I-unsplash-2000x1000.jpg"
-          alt="Minimal landscape"
-          style="max-width: 100%; height: auto; max-height: 400px; width: auto;"
-        />
-      </div>
+    <div style="flex: 1; display: flex; flex-direction: column; height: 100%;"> 
+      {% include "/components/test_publication.html" %}
       <hr>
       <div>
         <h2>Publikationen</h2>
@@ -45,12 +19,7 @@
       </blockquote>
       <cite>Authoren: Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.</cite>
       <hr>
-      <div>
-        <hgroup>
-          <h2>Research Experience</h2>
-          <hr>
-        </hgroup>
-      </div>
+      
       <div>
         <hgroup>
           <h2>Education</h2>

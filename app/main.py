@@ -1,9 +1,7 @@
-from pathlib import Path
 from typing import Optional
 
 from fastapi import FastAPI, Form, Header, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
-from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from app.backend_json import login_user, register_user, return_article
@@ -53,10 +51,10 @@ async def submit_login(
     print(f"Received email: {email}, password: {password}")
     login_successful = login_user(email=email, password=password)
     print(f"login is {login_successful}")
-    if login_successful == True:
+    if login_successful:
         print("Login successful.")
         return HTMLResponse(content="Login successful.", status_code=200)
-    elif login_successful == False:
+    elif not login_successful:
         print("Login failed.")
         return HTMLResponse(content="Invalid email or password.", status_code=400)
 
@@ -73,7 +71,14 @@ async def register(request: Request):
 
 @app.get("/home", response_class=HTMLResponse)
 async def home(request: Request):
-    return templates.TemplateResponse("home.html", {"request": request})
+    articles_dict = return_article()
+    context = {
+        "request": request,
+        "title": articles_dict["title"],
+        "authors": articles_dict["authors"],
+        "abstract": articles_dict["abstract"],
+    }
+    return templates.TemplateResponse("home.html", context)
 
 
 @app.get("/confirm_email", response_class=HTMLResponse)

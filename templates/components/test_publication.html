@@ -1,16 +1,15 @@
 <!-- templates/components/test_publication.html -->
 {% extends 'base.html' %}
 
-<!--{% block title %}
-    {{ title }}
-{% endblock %}-->
-
+{% block title %}
+{{ title }}
+{% endblock %}
 {% block content %}
 <article id="article">
   <h3>{{ title }}</h3>
   <p><em>Autoren: {{ authors }}</em></p>
   <blockquote>
-    "AUSZUG:{{ abstract }}"
+    {{ abstract }}
   </blockquote>
   <p><a href="#" onclick="event.preventDefault()"><small><strong>Leseliste Hinzufügen</strong></small></a></p>
   <footer>
@@ -18,4 +17,3 @@
   </footer>
 </article>
 {% endblock %}
-
