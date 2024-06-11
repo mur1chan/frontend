@@ -91,7 +91,14 @@ async def confirm_email(request: Request, email: str):
 
 @app.get("/profile", response_class=HTMLResponse)
 async def profile(request: Request):
-    return templates.TemplateResponse("profile.html", {"request": request})
+    articles_dict = return_article()
+    context = {
+        "request": request,
+        "title": articles_dict["title"],
+        "authors": articles_dict["authors"],
+        "abstract": articles_dict["abstract"],
+    }
+    return templates.TemplateResponse("profile.html", context)
 
 
 @app.get("/test-publication", response_class=HTMLResponse)
