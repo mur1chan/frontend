@@ -45,3 +45,7 @@ def login_user(email: str, password: str) -> bool:
 def return_article():
     articles_dict = load_json("articles.json")
     return articles_dict["0"]
+
+def return_titles():
+    titles_dict = load_json("titles.json")
+    return titles_dict

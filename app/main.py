@@ -4,7 +4,7 @@ from fastapi import FastAPI, Form, Header, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 
-from app.backend_json import login_user, register_user, return_article
+from app.backend_json import login_user, register_user, return_article, return_titles
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
@@ -88,12 +88,24 @@ async def confirm_email(request: Request, email: str):
         "confirmation.html", {"request": request, "email": email}
     )
 
+@app.get("/research-experience", response_class=HTMLResponse)
+async def research_experience(request: Request):
+    titles_dict = return_titles()
+    context = {
+        "request": request,
+        "research_experience": titles_dict["title_1"],
+    }
+    return templates.TemplateResponse(
+        "research_experience.html", context
+    )
 
 @app.get("/profile", response_class=HTMLResponse)
 async def profile(request: Request):
     articles_dict = return_article()
+    titles_dict = return_titles()
     context = {
         "request": request,
+        "research_experience": titles_dict["title_1"],
         "title": articles_dict["title"],
         "authors": articles_dict["authors"],
         "abstract": articles_dict["abstract"],
