@@ -106,6 +106,8 @@ async def profile(request: Request):
     context = {
         "request": request,
         "research_experience": titles_dict["title_1"],
+        "education": titles_dict["title_2"],
+        "contact_details": titles_dict["title_3"],
         "title": articles_dict["title"],
         "authors": articles_dict["authors"],
         "abstract": articles_dict["abstract"],
