@@ -1,18 +1,16 @@
 <!--- templates/profile.html --->
-{% extends 'base.html' %} 
-{% block title %}Profile{% endblock %} 
+{% extends 'base.html' %}
+{% block title %}Profile{% endblock %}
 {% block content%}
 {% include "/components/header_home.html" %}
 <div class="grid" style="display: flex; height: 100vh; align-items: stretch;">
   <div style="flex: 1; padding: 20px; display: flex; align-items: start; justify-content: center;  height: 100%;">
     <!-- Links Element -->
-   
+
     <div>
-        <img
+      <img
         src="https://raw.githubusercontent.com/picocss/examples/master/v2-html-classless/img/aleksandar-jason-a562ZEFKW8I-unsplash-2000x1000.jpg"
-        alt="Minimal landscape"
-        style="max-width: 100%; height: auto; max-height: 400px; width: auto;"
-      />
+        alt="Minimal landscape" style="max-width: 100%; height: auto; max-height: 400px; width: auto;" />
       <div>
         <p>Info</p>
         <p>Publikationen</p>
@@ -44,33 +42,27 @@
       <div class="grid">
         <img
           src="https://raw.githubusercontent.com/picocss/examples/master/v2-html-classless/img/aleksandar-jason-a562ZEFKW8I-unsplash-2000x1000.jpg"
-          alt="Minimal landscape"
-          style="max-width: 100%; height: auto; max-height: 400px; width: auto;"
-        />
+          alt="Minimal landscape" style="max-width: 100%; height: auto; max-height: 400px; width: auto;" />
         <img
           src="https://raw.githubusercontent.com/picocss/examples/master/v2-html-classless/img/aleksandar-jason-a562ZEFKW8I-unsplash-2000x1000.jpg"
-          alt="Minimal landscape"
-          style="max-width: 100%; height: auto; max-height: 400px; width: auto;"
-        />
+          alt="Minimal landscape" style="max-width: 100%; height: auto; max-height: 400px; width: auto;" />
         <img
           src="https://raw.githubusercontent.com/picocss/examples/master/v2-html-classless/img/aleksandar-jason-a562ZEFKW8I-unsplash-2000x1000.jpg"
-          alt="Minimal landscape"
-          style="max-width: 100%; height: auto; max-height: 400px; width: auto;"
-        />
+          alt="Minimal landscape" style="max-width: 100%; height: auto; max-height: 400px; width: auto;" />
       </div>
       <hr>
       <div>
         <h2>Publikationen</h2>
         {% include "/components/test_publication.html" %}
-      <hr>
-      {% include "/components/research_experience.html" %}
-      {% include "/components/education.html" %}
-      {% include "/components/contact_details.html" %}
+        <hr>
+        {% include "/components/research_experience.html" %}
+        {% include "/components/education.html" %}
+        {% include "/components/contact_details.html" %}
+      </div>
+    </div>
+    <div
+      style="flex: 1; display: flex; align-items: start; justify-content: center; flex-direction: column; height: 100%;">
+      <!-- Rechts Element -->
     </div>
   </div>
-  <div style="flex: 1; display: flex; align-items: start; justify-content: center; flex-direction: column; height: 100%;">
-    <!-- Rechts Element -->
-  </div>
-</div>
-{% endblock %}
-
+  {% endblock %}

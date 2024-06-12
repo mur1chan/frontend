@@ -1,13 +1,33 @@
 from typing import Optional
 
-from fastapi import FastAPI, Form, Header, Request
+from fastapi import FastAPI, Form, Header, Response
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
-
-from app.backend_json import login_user, register_user, return_article, return_titles
-
+from asgi_htmx import HtmxMiddleware
+from asgi_htmx import HtmxRequest as Request
+from app.backend_json import login_user, register_user, return_article, return_titles, load_json
+from fastapi_login import LoginManager
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
+components = Jinja2Templates(directory="templates/components")
+app.add_middleware(HtmxMiddleware)
+
+SECRET = "super-secret-key"
+
+manager = LoginManager(SECRET, "/submit-login", use_cookie=True, cookie_name='access_token')
+
+
+DB = load_json("users.json")
+
+@manager.user_loader()
+def r(email: str, password: str):
+
+    max_register_dict = len(DB)
+    for user_index in range(0, max_register_dict):
+        user_dict = DB[str(user_index)]
+        if user_dict["email"] == email and user_dict["password"] == password:
+            email = user_dict["email"]
+            return email
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -15,25 +35,19 @@ def index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
-@app.post("/submit", response_class=HTMLResponse)
+@app.post("/submit-register", response_class=HTMLResponse)
 async def submit(
     request: Request,
     email: str = Form(...),
     password: str = Form(...),
-    hx_request: Optional[str] = Header(None),
 ):
     print(f"Received email: {email}, password: {password}")
     register_new_user = register_user(email=email, password=password)
     if register_new_user:
         print("User registered successfully.")
-        if hx_request:
-            return RedirectResponse(
-                url=f"/confirm_email?email={email}", status_code=303
-            )
-        else:
-            return HTMLResponse(
-                content="Registration successful. Check your email.", status_code=200
-            )
+        return HTMLResponse(
+            content="Registration successful. Check your email.", status_code=200
+        )
     else:
         print("User registration failed.")
         return HTMLResponse(
@@ -41,22 +55,25 @@ async def submit(
         )
 
 
-@app.post("/submit_login", response_class=HTMLResponse)
+@app.post("/submit-login")
 async def submit_login(
     request: Request,
+    response: Response,
     email: str = Form(...),
     password: str = Form(...),
-    hx_request: Optional[str] = Header(None),
 ):
     print(f"Received email: {email}, password: {password}")
-    login_successful = login_user(email=email, password=password)
+    login_successful = r(email=email, password=password)
     print(f"login is {login_successful}")
     if login_successful:
         print("Login successful.")
-        return HTMLResponse(content="Login successful.", status_code=200)
+
+        token = manager.create_access_token(data={"sub": email})
+        manager.set_cookie(response, token)
+        return {"response": response}
     elif not login_successful:
         print("Login failed.")
-        return HTMLResponse(content="Invalid email or password.", status_code=400)
+        return HTMLResponse(content="Invalid email or password.", status_code=200)
 
 
 @app.get("/login", response_class=HTMLResponse)
@@ -70,7 +87,8 @@ async def register(request: Request):
 
 
 @app.get("/home", response_class=HTMLResponse)
-async def home(request: Request):
+async def home(
+        request: Request):
     articles_dict = return_article()
     context = {
         "request": request,
@@ -88,6 +106,7 @@ async def confirm_email(request: Request, email: str):
         "confirmation.html", {"request": request, "email": email}
     )
 
+
 @app.get("/research-experience", response_class=HTMLResponse)
 async def research_experience(request: Request):
     titles_dict = return_titles()
@@ -95,9 +114,8 @@ async def research_experience(request: Request):
         "request": request,
         "research_experience": titles_dict["title_1"],
     }
-    return templates.TemplateResponse(
-        "research_experience.html", context
-    )
+    return templates.TemplateResponse("research_experience.html", context)
+
 
 @app.get("/profile", response_class=HTMLResponse)
 async def profile(request: Request):
@@ -125,3 +143,43 @@ async def articles(request: Request):
         "abstract": articles_dict["abstract"],
     }
     return templates.TemplateResponse("test_publication.html", context)
+
+
+"""
+THIS IS AN EXAMPLE HOW TO USE HTMX WITH FASTAPI
+"""
+
+
+@app.get("/htmx", response_class=HTMLResponse)
+async def htmx(request: Request):
+    return templates.TemplateResponse("htmx_test.html", {"request": request})
+
+
+@app.get("/htmx-get-test", response_class=HTMLResponse)
+async def htmx_get_fn(request: Request):
+    scope = request.scope["htmx"]
+    print(scope.target)
+    print(scope.current_url)
+    context = {
+        "request": request,
+        "htmx_name": "this is inhereted from htmx",
+        "htmx_value": "this value is inhereted from htmx",
+    }
+    return components.TemplateResponse("result.html", context)
+
+
+@app.get("/htmx-get-user-input", response_class=HTMLResponse)
+async def htmx_get_user_input(request: Request):
+    scope = request.scope["htmx"]
+    # print(scope.target)
+    # print(scope.current_url)
+    # print(request.body)
+    return templates.TemplateResponse("user_input.html", {"request": request})
+
+
+# @app.post("/htmx-post-user-input", response_class=HTMLResponse)
+# async def htmx_post_user_input(request: Request, user_input: str = Form(...)):
+#     scope = request.scope["htmx"]
+#     print(scope.target)
+#     print(scope.current_url)
+#     print(scope.)

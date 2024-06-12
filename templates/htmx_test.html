@@ -1,0 +1,13 @@
+<!-- templates/htmx_test.html -->
+{% include "/components/header.html" %}
+{% extends 'base.html' %}
+{% block title %}HTMX{% endblock %}
+{% block content %}
+<div style="display: flex; justify-content: center; align-items: center;">
+  <main style="max-width: 600px; padding: 1em; border: 1px solid #ccc">
+    <button hx-get="/htmx-get-test" hx-swap="outerHTML" hx-target="this">GET HTMX LIST</button>
+    <!-- DEFINE HERE THE hx-target (the component you want to swap ("this" swaps the button to the list)) AND hx-swap for inner or outerHTML -->
+    <div id="show-data"></div>
+  </main>
+</div>
+{% endblock %}
