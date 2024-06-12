@@ -2,28 +2,16 @@
 
 {% include "/components/header.html" %}
 {% extends 'base.html' %}
-{% block title %}Login{% endblock %} {% block content %}
-<div id="success-message"></div>
+{% block title %}Login{% endblock %}
+{% block content %}
+<div id="success-message" hx-target="this"></div>
 <div style="display: flex; justify-content: center; align-items: center;">
   <main style="max-width: 600px; padding: 1em; border: 1px solid #ccc">
-    <form id="login-form">
-      <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        aria-label="Email"
-        autocomplete="email"
-        required
-        style="width: 100%; margin-bottom: 1em"
-      />
-      <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        aria-label="Password"
-        required
-        style="width: 100%; margin-bottom: 1em"
-      />
+    <form id="login-form" hx-post="/submit-login" hx-trigger="submit" hx-swap="outerHTML">
+      <input type="email" name="email" placeholder="Email" aria-label="Email" autocomplete="email" required
+        style="width: 100%; margin-bottom: 1em" />
+      <input type="password" name="password" placeholder="Password" aria-label="Password" required
+        style="width: 100%; margin-bottom: 1em" />
       <label style="display: block; margin-bottom: 1em">
         <input type="checkbox" name="placeholder" />
         Lorem Ipsum unchecked
@@ -34,40 +22,11 @@
       </label>
       <hr />
       <p><a href="/register">Noch kein Account?</a></p>
-      <button type="button" style="width: 100%" onclick="loginUser()">Login</button>
+
+      <button type="submit" style="width: 100%">Login</button>
+      <!-- <button type="button" style="width: 100%" onclick="loginUser()">Login</button> -->
       <div id="error-message" style="margin-top: 0.5em;"></div>
     </form>
   </main>
 </div>
-<!-- Am Ende der HTML-Seite -->
-<script>
-  async function loginUser() {
-    const form = document.getElementById("login-form");
-    const formData = new FormData(form);
-
-    try {
-      const response = await fetch("/submit_login", {
-        method: "POST",
-        body: formData
-      });
-
-      if (response.ok) {
-        // Weiterleitung auf die Home-Seite, falls der Login erfolgreich ist
-        window.location.href = "/profile";
-      } else {
-        const errorMessage = await response.text();
-        showMessage(errorMessage, "red");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      showMessage("An error occurred. Please try again later.", "red");
-    }
-  }
-
-  function showMessage(message, color) {
-    const messageDiv = document.getElementById("error-message");
-    messageDiv.textContent = message;
-    messageDiv.style.color = color;
-  }
-</script>
 {% endblock %}

@@ -1,19 +1,19 @@
 <!-- templates/base.html -->
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="light dark" />
-    <title>{% block title %}FastAPI + HTMX Demo{% endblock %}</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.sand.min.css"
-    />
-    <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/response-targets.js"></script>
-    <script src="https://unpkg.com/htmx.org"></script>
-  </head>
-  <body>
-    <main class="container" max-width="600px" margin-left="0" margin-right="auto" padding="1em" border="1px solid #ccc">{% block content %}{% endblock %}</main>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+
+  <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.sand.min.css" />
+</head>
+
+<body>
+  <main class="container" max-width="600px" margin-left="0" margin-right="auto" padding="1em" border="1px solid #ccc">{%
+    block content %}{% endblock %}</main>
+</body>
+
 </html>

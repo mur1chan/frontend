@@ -1,0 +1,15 @@
+<!-- /templates/components/user_input.html -->
+{% include "/components/header.html" %}
+{% extends 'base.html' %}
+{% block title %}HTMX{% endblock %}
+{% block content %}
+<div style="display: flex; justify-content: center; align-items: center;">
+  <main>
+    <form hx-post="/htmx-post-user-input" hx-swap="outerHTML" hx-trigger="click" hx-target="#show-data">
+      <input name="user_input"></textarea>
+      <button type="submit">SUBMIT</button>
+      <div id="show-data">{{ response }}</div>
+    </form>
+  </main>
+</div>
+{% endblock %}
