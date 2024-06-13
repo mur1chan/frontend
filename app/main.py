@@ -1,12 +1,19 @@
 from typing import Optional
 
-from fastapi import FastAPI, Form, Header, Response
+from fastapi import Depends, FastAPI, Form, Header, Response
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from asgi_htmx import HtmxMiddleware
 from asgi_htmx import HtmxRequest as Request
-from app.backend_json import login_user, register_user, return_article, return_titles, load_json
+from app.backend_json import (
+    login_user,
+    register_user,
+    return_article,
+    return_titles,
+    load_json,
+)
 from fastapi_login import LoginManager
+
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 components = Jinja2Templates(directory="templates/components")
@@ -14,20 +21,23 @@ app.add_middleware(HtmxMiddleware)
 
 SECRET = "super-secret-key"
 
-manager = LoginManager(SECRET, "/submit-login", use_cookie=True, cookie_name='access_token')
+manager = LoginManager(
+    SECRET, "/submit-login", use_cookie=True, cookie_name="access_token"
+)
 
 
 DB = load_json("users.json")
 
-@manager.user_loader()
-def r(email: str, password: str):
+DB = load_json("users.json")
 
-    max_register_dict = len(DB)
-    for user_index in range(0, max_register_dict):
-        user_dict = DB[str(user_index)]
-        if user_dict["email"] == email and user_dict["password"] == password:
-            email = user_dict["email"]
-            return email
+
+@manager.user_loader()
+def load_user(email: str):
+    # Return user dictionary if user with the email exists
+    for user in DB.values():
+        if user["email"] == email:
+            return user
+    return None
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -63,15 +73,13 @@ async def submit_login(
     password: str = Form(...),
 ):
     print(f"Received email: {email}, password: {password}")
-    login_successful = r(email=email, password=password)
-    print(f"login is {login_successful}")
-    if login_successful:
+    user = load_user(email)
+    if user and user["password"] == password:
         print("Login successful.")
-
         token = manager.create_access_token(data={"sub": email})
         manager.set_cookie(response, token)
         return {"response": response}
-    elif not login_successful:
+    else:
         print("Login failed.")
         return HTMLResponse(content="Invalid email or password.", status_code=200)
 
@@ -87,8 +95,7 @@ async def register(request: Request):
 
 
 @app.get("/home", response_class=HTMLResponse)
-async def home(
-        request: Request):
+async def home(request: Request, user=Depends(manager)):
     articles_dict = return_article()
     context = {
         "request": request,
@@ -101,7 +108,6 @@ async def home(
 
 @app.get("/confirm_email", response_class=HTMLResponse)
 async def confirm_email(request: Request, email: str):
-    # Rendern Sie die Bestätigungsseite und geben Sie die E-Mail-Adresse an das Template weiter
     return templates.TemplateResponse(
         "confirmation.html", {"request": request, "email": email}
     )
