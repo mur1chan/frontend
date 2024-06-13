@@ -1,33 +1,13 @@
 <!-- templates/components/header_home.html -->
-<header>
-  <main class="container">
-    <nav>
-      <ul class="grid">
-        <strong><a href="/">Open Science</a> </strong>
-      </ul>
-      <ul>
-        <li>
-          <input
-            type="search"
-            name="search"
-            placeholder="Search"
-            aria-label="Search"
-            class="button"
-          />
-        </li>
-      </ul>
-      <li>
-        <a href="/home/" class="button">Home</a>
-      </li>
-      <li>
-        <a href="/messages/" class="button">Nachrichten</a>
-      </li>
-      <li>
-        <a href="/req/" class="button">Anfragen</a>
-      </li>
-      <li>
-        <a href="/profile/" class="button">Profile</a>
-      </li>
-    </nav>
-  </main>
-</header>
+<div class="navbar bg-base-100 flex justify-between">
+  <a class="btn btn-ghost text-xl" href="/">Open Science</a>
+  <div class="space-x-reverse">
+    <label class="input flex items-center gap-2">
+      <input type="text" class="grow rounded-full focus:outline-none focus:border-none" placeholder="Search"  />
+    </label>
+    <a href="/home/" class="btn btn-ghost text-xl">Home</a>
+    <a href="/messages/" class="btn btn-ghost text-xl">Nachrichten</a>
+    <a href="/req/" class="btn btn-ghost text-xl">Anfragen</a>
+    <a href="/profile/" class="btn btn-ghost text-xl">Profile</a>
+  </div>
+</div>

@@ -2,18 +2,22 @@
 <!doctype html>
 <html lang="en">
 
+<html data-theme="autumn">
+
+</html>
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="color-scheme" content="light dark" />
-
+  <!-- <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.2/dist/full.min.css" rel="stylesheet" type="text/css" /> -->
+  <!-- <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script> -->
   <script src="https://unpkg.com/htmx.org@1.9.12"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.sand.min.css" />
+  <link href="/static/output.css" rel="stylesheet" type="text/css" />
+  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
 </head>
 
 <body>
-  <main class="container" max-width="600px" margin-left="0" margin-right="auto" padding="1em" border="1px solid #ccc">{%
-    block content %}{% endblock %}</main>
+  {%block content %}{% endblock %}
 </body>
 
 </html>

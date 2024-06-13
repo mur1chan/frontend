@@ -3,66 +3,57 @@
 {% block title %}Profile{% endblock %}
 {% block content%}
 {% include "/components/header_home.html" %}
-<div class="grid" style="display: flex; height: 100vh; align-items: stretch;">
-  <div style="flex: 1; padding: 20px; display: flex; align-items: start; justify-content: center;  height: 100%;">
+<div class="grid grid-cols-1 sm:grid-cols-4 items-stretch">
+  <div class="p-5 flex items-start justify-center h-full sm:col-span-1">
     <!-- Links Element -->
-
     <div>
       <img
         src="https://raw.githubusercontent.com/picocss/examples/master/v2-html-classless/img/aleksandar-jason-a562ZEFKW8I-unsplash-2000x1000.jpg"
-        alt="Minimal landscape" style="max-width: 100%; height: auto; max-height: 400px; width: auto;" />
-      <div>
-        <p>Info</p>
-        <p>Publikationen</p>
-        <p>Beiträge</p>
-      </div>
-      <div>
-        <hr>
-        <h4>Topics</h4>
+        alt="Minimal landscape" class="max-w-full h-auto max-h-96 w-auto" />
+      <div class="mt-4 space-y-2">
+        <hr class="border-gray-200">
+        <h4 class="font-bold">Topics</h4>
         <p>Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint</p>
-        <h4>Skills and expertise</h4>
+        <h4 class="font-bold">Skills and expertise</h4>
         <p>Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint</p>
-        <h4>X</h4>
+        <h4 class="font-bold">X</h4>
         <p>Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint</p>
-        <hr>
-        <p><strong>Als Kontakt Hinzufügen</strong></p>
-        <p><strong>Nachricht senden</strong></p>
-        <p><strong>Melden</strong></p>
+        <hr class="border-gray-200">
+        <p class="font-bold">Als Kontakt Hinzufügen</p>
+        <p class="font-bold">Nachricht senden</p>
+        <p class="font-bold">Melden</p>
       </div>
     </div>
-
   </div>
-  <div style="flex: 2; margin: 0 20px; display: flex; flex-direction: column; height: 100%;">
+  <div class="p-5 flex flex-col items-start h-full sm:col-span-2">
     <!-- Element Mitte -->
-    <div style="flex: 1; display: flex; flex-direction: column; height: 100%;">
-      <h2>Name</h2>
-      <p>Institution</p>
-      <p>Bereich</p>
-      <hr>
-      <div class="grid">
-        <img
-          src="https://raw.githubusercontent.com/picocss/examples/master/v2-html-classless/img/aleksandar-jason-a562ZEFKW8I-unsplash-2000x1000.jpg"
-          alt="Minimal landscape" style="max-width: 100%; height: auto; max-height: 400px; width: auto;" />
-        <img
-          src="https://raw.githubusercontent.com/picocss/examples/master/v2-html-classless/img/aleksandar-jason-a562ZEFKW8I-unsplash-2000x1000.jpg"
-          alt="Minimal landscape" style="max-width: 100%; height: auto; max-height: 400px; width: auto;" />
-        <img
-          src="https://raw.githubusercontent.com/picocss/examples/master/v2-html-classless/img/aleksandar-jason-a562ZEFKW8I-unsplash-2000x1000.jpg"
-          alt="Minimal landscape" style="max-width: 100%; height: auto; max-height: 400px; width: auto;" />
-      </div>
-      <hr>
-      <div>
-        <h2>Publikationen</h2>
-        {% include "/components/test_publication.html" %}
-        <hr>
-        {% include "/components/research_experience.html" %}
-        {% include "/components/education.html" %}
-        {% include "/components/contact_details.html" %}
-      </div>
+    <h2 class="font-bold text-2xl">Name</h2>
+    <p>Institution</p>
+    <p>Bereich</p>
+    <hr class="border-gray-200">
+    <div class="flex mt-4">
+      <img
+        src="https://raw.githubusercontent.com/picocss/examples/master/v2-html-classless/img/aleksandar-jason-a562ZEFKW8I-unsplash-2000x1000.jpg"
+        alt="Minimal landscape" class="w-1/3 h-auto max-h-96 mb-4" />
+      <img
+        src="https://raw.githubusercontent.com/picocss/examples/master/v2-html-classless/img/aleksandar-jason-a562ZEFKW8I-unsplash-2000x1000.jpg"
+        alt="Minimal landscape" class="w-1/3 h-auto max-h-96 mb-4" />
+      <img
+        src="https://raw.githubusercontent.com/picocss/examples/master/v2-html-classless/img/aleksandar-jason-a562ZEFKW8I-unsplash-2000x1000.jpg"
+        alt="Minimal landscape" class="w-1/3 h-auto max-h-96 mb-4" />
     </div>
-    <div
-      style="flex: 1; display: flex; align-items: start; justify-content: center; flex-direction: column; height: 100%;">
-      <!-- Rechts Element -->
+    <hr class="border-gray-200">
+    <div class="mt-4">
+      <h2 class="font-bold text-2xl">Publikationen</h2>
+      {% include "/components/test_publication.html" %}
+      <hr class="border-gray-200">
+      {% include "/components/research_experience.html" %}
+      {% include "/components/education.html" %}
+      {% include "/components/contact_details.html" %}
     </div>
   </div>
-  {% endblock %}
+  <div class="p-5 flex items-start justify-center h-full sm:col-span-1">
+    <!-- Rechts Element -->
+  </div>
+</div>
+{% endblock %}

@@ -1,48 +1,35 @@
 <!-- templates/index.html -->
 
-{% include '/components/header.html' %}
 {% extends 'base.html' %}
+{% include '/components/header.html' %}
 
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<div style="display: flex; align-items: flex-start;">
-  <main style="max-width: 600px; margin-left: 0; margin-right: auto; padding: 1em; border: 1px solid #ccc;">
-    <form hx-post="/submit" hx-target="body" hx-swap="outerHTML">
-      <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        aria-label="Email"
-        autocomplete="email"
-        required
-      />
-      <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        aria-label="Password"
-        required
-      />
-      <label>
-        <input type="checkbox" name="placeholder" />
-        Lorem Ipsum unchecked
-      </label>
-      <label>
-        <input type="checkbox" name="placeholder" checked />
-        Lorem Ipsum checked
-      </label>
-      <hr />￼
-      <p>Noch kein Account?</p>
-      <button type="submit">Registrieren</button>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-4 px-2.5 py-4 border border-4">
+  <div class="w-full h-auto bg-gray-300 rounded-xl p-6 m-auto bg-white shadow-md ring-2 ring-gray-800/50">
+    <h1 class="text-3xl font-semibold text-center text-gray-700">Jetzt registrieren</h1>
+    <form class="space-y-4 mt-6">
+      <div>
+        <label class="label">
+          <span class="text-base label-text">Email</span>
+        </label>
+        <input type="text" placeholder="Email Address" class="w-full input input-bordered" />
+      </div>
+      <div>
+        <label class="label">
+          <span class="text-base label-text">Password</span>
+        </label>
+        <input type="password" placeholder="Enter Password" class="w-full input input-bordered" />
+      </div>
+      <a href="#" class="text-xs text-gray-600 hover:underline hover:text-blue-600">Forget Password?</a>
+      <div>
+        <button class="btn-neutral btn btn-block">Login</button>
+      </div>
     </form>
-  </main>
-  <figure style="margin-left: 1em;">
-    <img
-      src="https://raw.githubusercontent.com/picocss/examples/master/v2-html-classless/img/aleksandar-jason-a562ZEFKW8I-unsplash-2000x1000.jpg"
-      alt="Minimal landscape"
-      style="max-width: 100%; height: auto; max-height: 400px;"
-    />
-  </figure>
+  </div>
+  <div class="w-full h-64 bg-gray-300 rounded-xl">
+    <div class="skeleton w-full h-full"></div>
+  </div>
 </div>
 {% endblock %}

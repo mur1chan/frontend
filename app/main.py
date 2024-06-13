@@ -1,12 +1,20 @@
 from typing import Optional
 
-from fastapi import FastAPI, Form, Header, Response
+from fastapi import Depends, FastAPI, Form, HTTPException, Header, Response
+from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from asgi_htmx import HtmxMiddleware
 from asgi_htmx import HtmxRequest as Request
-from app.backend_json import login_user, register_user, return_article, return_titles, load_json
+from app.backend_json import (
+    login_user,
+    register_user,
+    return_article,
+    return_titles,
+    load_json,
+)
 from fastapi_login import LoginManager
+
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 components = Jinja2Templates(directory="templates/components")
@@ -14,21 +22,27 @@ app.add_middleware(HtmxMiddleware)
 
 SECRET = "super-secret-key"
 
-manager = LoginManager(SECRET, "/submit-login", use_cookie=True, cookie_name='access_token')
+manager = LoginManager(
+    SECRET, "/submit-login", use_cookie=True, cookie_name="access_token"
+)
 
-
+app.mount("/static", StaticFiles(directory="static"), name="static")
 DB = load_json("users.json")
 
+
 @manager.user_loader()
-def r(email: str, password: str):
+def load_user(email: str):
+    # Return user dictionary if user with the email exists
+    for user in DB.values():
+        if user["email"] == email:
+            return user
+    return None
 
-    max_register_dict = len(DB)
-    for user_index in range(0, max_register_dict):
-        user_dict = DB[str(user_index)]
-        if user_dict["email"] == email and user_dict["password"] == password:
-            email = user_dict["email"]
-            return email
-
+@app.exception_handler(HTTPException)
+async def http_exception_handler(request: Request, exc: HTTPException):
+    if exc.status_code == 401:
+        return templates.TemplateResponse("invalid_credentials.html", {"request": request}, status_code=401)
+    # You can add more conditions here to handle other status codes
 
 @app.get("/", response_class=HTMLResponse)
 def index(request: Request):
@@ -55,6 +69,7 @@ async def submit(
         )
 
 
+
 @app.post("/submit-login")
 async def submit_login(
     request: Request,
@@ -62,16 +77,40 @@ async def submit_login(
     email: str = Form(...),
     password: str = Form(...),
 ):
+    """
+    Handle the login submission.
+
+    This function processes the login form submission. It validates the user's
+    credentials, creates an access token if login is successful, and sets a cookie
+    with the token. It returns a `TemplateResponse` with a success message on successful
+    login or an `HTMLResponse` with an error message on failed login.
+
+    Args:
+        request (Request): The request object.
+        response (Response): The response object to set cookies on.
+        email (str): The user's email address from the form.
+        password (str): The user's password from the form.
+
+    Returns:
+        TemplateResponse: On successful login, returns a `TemplateResponse` with the
+        access token.
+        HTMLResponse: On failed login, returns an `HTMLResponse` with an error message.
+    """
     print(f"Received email: {email}, password: {password}")
-    login_successful = r(email=email, password=password)
+    login_successful = load_user(email=email)
     print(f"login is {login_successful}")
     if login_successful:
         print("Login successful.")
-
         token = manager.create_access_token(data={"sub": email})
         manager.set_cookie(response, token)
-        return {"response": response}
-    elif not login_successful:
+        context = {
+            "request": request,
+            "access_token": token,
+        }
+        template_response = components.TemplateResponse("success_login.html", context=context)
+        manager.set_cookie(template_response, token)
+        return template_response
+    else:
         print("Login failed.")
         return HTMLResponse(content="Invalid email or password.", status_code=200)
 
@@ -87,8 +126,7 @@ async def register(request: Request):
 
 
 @app.get("/home", response_class=HTMLResponse)
-async def home(
-        request: Request):
+async def home(request: Request, user=Depends(manager)):
     articles_dict = return_article()
     context = {
         "request": request,
@@ -153,6 +191,11 @@ THIS IS AN EXAMPLE HOW TO USE HTMX WITH FASTAPI
 @app.get("/htmx", response_class=HTMLResponse)
 async def htmx(request: Request):
     return templates.TemplateResponse("htmx_test.html", {"request": request})
+
+
+@app.exception_handler(404)
+async def not_found(request: Request, exc: HTTPException):
+    return templates.TemplateResponse("404.html", {"request": request}, status_code=404)
 
 
 @app.get("/htmx-get-test", response_class=HTMLResponse)
