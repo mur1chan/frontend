@@ -107,7 +107,7 @@ async def submit_login(
             "request": request,
             "access_token": token,
         }
-        template_response = components.TemplateResponse("success_login.html", context=context)
+        template_response = templates.TemplateResponse("success_login.html", context=context)
         manager.set_cookie(template_response, token)
         return template_response
     else:
