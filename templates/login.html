@@ -1,32 +1,38 @@
-<!-- templates/login.html -->
-
 {% include "/components/header.html" %}
 {% extends 'base.html' %}
 {% block title %}Login{% endblock %}
 {% block content %}
 <div id="success-message" hx-target="this"></div>
-<div style="display: flex; justify-content: center; align-items: center;">
-  <main style="max-width: 600px; padding: 1em; border: 1px solid #ccc">
-    <form id="login-form" hx-post="/submit-login" hx-trigger="submit" hx-swap="outerHTML">
-      <input type="email" name="email" placeholder="Email" aria-label="Email" autocomplete="email" required
-        style="width: 100%; margin-bottom: 1em" />
-      <input type="password" name="password" placeholder="Password" aria-label="Password" required
-        style="width: 100%; margin-bottom: 1em" />
-      <label style="display: block; margin-bottom: 1em">
-        <input type="checkbox" name="placeholder" />
-        Lorem Ipsum unchecked
+<div class="flex justify-center items-center w-full">
+  <div class="w-full max-w-xl p-4 border border-gray-300">
+    <form id="login-form" hx-post="/submit-login" hx-trigger="submit" hx-swap="outerHTML" class="space-y-4">
+      <div>
+        <label class="label">
+          <span class="label-text">Email</span>
+        </label>
+        <input type="email" name="email" placeholder="Email" aria-label="Email" autocomplete="email" required
+          class="w-full input input-bordered" />
+      </div>
+      <div>
+        <label class="label">
+          <span class="label-text">Password</span>
+        </label>
+        <input type="password" name="password" placeholder="Password" aria-label="Password" required
+          class="w-full input input-bordered" />
+      </div>
+      <label class="flex items-center space-x-2">
+        <input type="checkbox" name="placeholder" class="checkbox checkbox-accent" />
+        <span>Lorem Ipsum unchecked</span>
       </label>
-      <label style="display: block; margin-bottom: 1em">
-        <input type="checkbox" name="placeholder" checked />
-        Lorem Ipsum checked
+      <label class="flex items-center space-x-2">
+        <input type="checkbox" name="placeholder" checked class="checkbox checkbox-accent" />
+        <span>Lorem Ipsum checked</span>
       </label>
-      <hr />
-      <p><a href="/register">Noch kein Account?</a></p>
-
-      <button type="submit" style="width: 100%">Login</button>
-      <!-- <button type="button" style="width: 100%" onclick="loginUser()">Login</button> -->
-      <div id="error-message" style="margin-top: 0.5em;"></div>
+      <hr class="border-gray-200" />
+      <p><a href="/register" class="text-blue-500 hover:underline">Noch kein Account?</a></p>
+      <button type="submit" class="btn btn-neutral w-full">Login</button>
+      <div id="error-message" class="mt-2"></div>
     </form>
-  </main>
+  </div>
 </div>
 {% endblock %}
