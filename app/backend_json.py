@@ -1,5 +1,6 @@
 import json
-
+from typing import List, Tuple
+import secrets
 from typing_extensions import Dict
 
 
@@ -13,7 +14,12 @@ def save_json(json_name: str, data: Dict):
         json.dump(data, target, indent=4)
 
 
-def register_user(email: str, password: str) -> bool:
+def append_json(json_name: str, data: Dict):
+    with open(json_name, "a") as target:
+        json.dump(data, target, indent=4)
+
+
+def register_user(name: str, email: str, password: str) -> bool:
     register_dict = load_json("users.json")
 
     # Check if the email already exists in the register_dict
@@ -25,11 +31,39 @@ def register_user(email: str, password: str) -> bool:
 
     # If the email does not exist, add the new user
     new_index = str(len(register_dict))
-    register_dict[new_index] = {"email": email, "password": password}
+    register_dict[new_index] = {"name": name, "email": email, "password": password}
     save_json("users.json", register_dict)
     print(f"{email} registered successfully")
     return True
 
+
+def load_session(token: str):
+    """
+    need token of user to return email
+    """
+    session_dict = load_json("session.json")
+    session_info = session_dict.get(token)
+    if session_info:
+        return session_info
+    else:
+        return False
+
+
+def save_session(token: str, email: str):
+    """
+    save the session of the user as identifier
+    token and email are required
+    """
+    sessions = load_json("session.json")
+    sessions[token] = email
+    save_json("session.json", sessions)
+    print(f"{email} with token: {token} successfully logged")
+    return True
+
+def load_profile(user_id: str):
+    users_dict = load_json("users.json")
+    print(users_dict[user_id])
+    return users_dict[user_id]
 
 def login_user(email: str, password: str) -> bool:
     users_dict = load_json("users.json")
@@ -44,8 +78,11 @@ def login_user(email: str, password: str) -> bool:
 
 def return_article():
     articles_dict = load_json("articles.json")
-    return articles_dict["0"]
+    secrange = secrets.SystemRandom().randint(1, len(articles_dict)-1)
+    return articles_dict[str(secrange)]
+
 
 def return_titles():
     titles_dict = load_json("titles.json")
     return titles_dict
+

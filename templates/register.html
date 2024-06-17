@@ -8,6 +8,12 @@
     <form id="register-form" hx-post="/submit-register" hx-trigger="submit" hx-swap="outerHTML" class="space-y-4">
       <div>
         <label class="label">
+          <span class="label-text">Name</span>
+        </label>
+        <input type="name" name="name" placeholder="" aria-label="Name" required class="w-full input input-bordered" />
+      </div>
+      <div>
+        <label class="label">
           <span class="label-text">Email</span>
         </label>
         <input type="email" name="email" placeholder="Email" aria-label="Email" autocomplete="email" required class="w-full input input-bordered" />

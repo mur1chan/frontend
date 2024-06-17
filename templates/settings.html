@@ -1,6 +1,6 @@
-<!--- templates/profile.html --->
+<!--- templates/settings.html --->
 {% extends 'base.html' %}
-{% block title %}Profile{% endblock %}
+{% block title %}settings{% endblock %}
 {% block content%}
 {% include "/components/header_home.html" %}
 <div class="grid grid-cols-1 sm:grid-cols-4 items-stretch">
@@ -8,28 +8,16 @@
     <!-- Links Element -->
     <div>
       <img
-          <img src="data:image/jpeg;charset=utf-8;base64, {{ profile_picture }}"
+        src="https://raw.githubusercontent.com/picocss/examples/master/v2-html-classless/img/aleksandar-jason-a562ZEFKW8I-unsplash-2000x1000.jpg"
         alt="Minimal landscape" class="max-w-full h-auto max-h-96 w-auto" />
-      <div class="mt-4 space-y-2">
-        <hr class="border-gray-200">
-        <h4 class="font-bold">Topics</h4>
-        <p>{{ topics }}</p>
-        <h4 class="font-bold">Skills and expertise</h4>
-        <p>{{ skills }}</p>
-        <h4 class="font-bold">X</h4>
-        <p>Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint</p>
-        <hr class="border-gray-200">
-        <p class="font-bold">Als Kontakt Hinzufügen</p>
-        <p class="font-bold">Nachricht senden</p>
-        <p class="font-bold">Melden</p>
-      </div>
+      
     </div>
   </div>
   <div class="p-5 flex flex-col items-start h-full sm:col-span-2">
     <!-- Element Mitte -->
-    <h2 class="font-bold text-2xl">{{ name }}</h2>
-    <p>Institution</p>
-    <p>Bereich</p>
+    <h2 class="font-bold text-2xl">Einstellungen</h2>
+    <input type="text" placeholder="{{ email }}" class="input input-bordered w-full max-w-xs" disabled />
+    
     <hr class="border-gray-200">
     <div class="flex mt-4">
       <img

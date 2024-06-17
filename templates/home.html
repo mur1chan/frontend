@@ -1,16 +1,12 @@
-{% block content%}
+{% extends 'base.html' %}
 {% include "/components/header_home.html" %}
+{% block content%}
 <div class="mx-5 mt-10 flex flex-col h-full items-center justify-center">
   <div class="flex-1 flex flex-col max-w-xl items-center justify-center"> 
-    {% include "/components/test_publication.html" %}
+    {% include "/components/publication.html" %}
     <hr class="border-gray-200">
     <div>
-      <h2 class="text-2xl font-bold">Publikationen</h2>
-      <p class="text-gray-600">Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.</p>
     </div>
-    <blockquote class="p-4 italic border-l-4 bg-neutral-focus text-neutral-content">
-      Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.
-    </blockquote>
   </div>
 </div>
 {% endblock %}

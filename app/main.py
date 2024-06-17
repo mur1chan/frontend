@@ -1,26 +1,35 @@
-from typing import Optional
+from typing import Optional, Union
 
-from fastapi import Depends, FastAPI, Form, HTTPException, Header, Response
+from fastapi import Cookie, Depends, FastAPI, Form, HTTPException, Header, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from asgi_htmx import HtmxMiddleware
 from asgi_htmx import HtmxRequest as Request
 from app.backend_json import (
+    load_profile,
+    load_session,
     login_user,
     register_user,
     return_article,
     return_titles,
     load_json,
+    save_json,
+    save_session,
 )
 from fastapi_login import LoginManager
+
+from dotenv import load_dotenv
+import os
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 components = Jinja2Templates(directory="templates/components")
 app.add_middleware(HtmxMiddleware)
 
+# SECRET  = os.getenv("secret")
 SECRET = "super-secret-key"
+
 
 manager = LoginManager(
     SECRET, "/submit-login", use_cookie=True, cookie_name="access_token"
@@ -38,11 +47,15 @@ def load_user(email: str):
             return user
     return None
 
+
 @app.exception_handler(HTTPException)
 async def http_exception_handler(request: Request, exc: HTTPException):
     if exc.status_code == 401:
-        return templates.TemplateResponse("invalid_credentials.html", {"request": request}, status_code=401)
+        return templates.TemplateResponse(
+            "invalid_credentials.html", {"request": request}, status_code=401
+        )
     # You can add more conditions here to handle other status codes
+
 
 @app.get("/", response_class=HTMLResponse)
 def index(request: Request):
@@ -52,11 +65,12 @@ def index(request: Request):
 @app.post("/submit-register", response_class=HTMLResponse)
 async def submit(
     request: Request,
+    name: str = Form(...),
     email: str = Form(...),
     password: str = Form(...),
 ):
     print(f"Received email: {email}, password: {password}")
-    register_new_user = register_user(email=email, password=password)
+    register_new_user = register_user(name=name, email=email, password=password)
     if register_new_user:
         print("User registered successfully.")
         return HTMLResponse(
@@ -67,7 +81,6 @@ async def submit(
         return HTMLResponse(
             content="There is already a user with this email.", status_code=400
         )
-
 
 
 @app.post("/submit-login")
@@ -102,12 +115,15 @@ async def submit_login(
     if login_successful:
         print("Login successful.")
         token = manager.create_access_token(data={"sub": email})
+        save_session(token=token, email=email)
         manager.set_cookie(response, token)
         context = {
             "request": request,
             "access_token": token,
         }
-        template_response = templates.TemplateResponse("success_login.html", context=context)
+        template_response = templates.TemplateResponse(
+            "success_login.html", context=context
+        )
         manager.set_cookie(template_response, token)
         return template_response
     else:
@@ -139,55 +155,61 @@ async def home(request: Request, user=Depends(manager)):
 
 @app.get("/confirm_email", response_class=HTMLResponse)
 async def confirm_email(request: Request, email: str):
-    # Rendern Sie die Bestätigungsseite und geben Sie die E-Mail-Adresse an das Template weiter
     return templates.TemplateResponse(
         "confirmation.html", {"request": request, "email": email}
     )
 
 
-@app.get("/research-experience", response_class=HTMLResponse)
-async def research_experience(request: Request):
-    titles_dict = return_titles()
-    context = {
-        "request": request,
-        "research_experience": titles_dict["title_1"],
-    }
-    return templates.TemplateResponse("research_experience.html", context)
-
-
-@app.get("/profile", response_class=HTMLResponse)
-async def profile(request: Request):
+@app.get("/profile/{profile_id}", response_class=HTMLResponse)
+async def profile(request: Request, profile_id, user=Depends(manager)):
+    print(profile_id)
+    profile_dict = load_profile(str(profile_id))
+    print(profile_dict)
     articles_dict = return_article()
     titles_dict = return_titles()
     context = {
         "request": request,
+        "name": profile_dict["name"],
+        "topics": profile_dict["topics"],
+        "skills": profile_dict["skills"],
+        "profile_picture": profile_dict["profile_picture"],
         "research_experience": titles_dict["title_1"],
         "education": titles_dict["title_2"],
         "contact_details": titles_dict["title_3"],
         "title": articles_dict["title"],
         "authors": articles_dict["authors"],
         "abstract": articles_dict["abstract"],
+        "user": user,
     }
     return templates.TemplateResponse("profile.html", context)
 
-
-@app.get("/test-publication", response_class=HTMLResponse)
-async def articles(request: Request):
+@app.get("/my-account", response_class=HTMLResponse)
+async def my_account(request: Request, user=Depends(manager)):
+    cookie_value = request.cookies.get("access_token")
+    print(cookie_value)
+    email = load_session(token=cookie_value)
+    user = load_user(email)
     articles_dict = return_article()
+    titles_dict = return_titles()
     context = {
         "request": request,
+        "name": user["name"],
+        "topics": user["topics"],
+        "skills": user["skills"],
+        "profile_picture": user["profile_picture"],
+        "research_experience": titles_dict["title_1"],
+        "education": titles_dict["title_2"],
+        "contact_details": titles_dict["title_3"],
         "title": articles_dict["title"],
         "authors": articles_dict["authors"],
         "abstract": articles_dict["abstract"],
+        "user": user,
     }
-    return templates.TemplateResponse("test_publication.html", context)
-
+    return templates.TemplateResponse("my_account.html", context)
 
 """
 THIS IS AN EXAMPLE HOW TO USE HTMX WITH FASTAPI
 """
-
-
 @app.get("/htmx", response_class=HTMLResponse)
 async def htmx(request: Request):
     return templates.TemplateResponse("htmx_test.html", {"request": request})
@@ -211,18 +233,10 @@ async def htmx_get_fn(request: Request):
     return components.TemplateResponse("result.html", context)
 
 
-@app.get("/htmx-get-user-input", response_class=HTMLResponse)
-async def htmx_get_user_input(request: Request):
-    scope = request.scope["htmx"]
-    # print(scope.target)
-    # print(scope.current_url)
-    # print(request.body)
-    return templates.TemplateResponse("user_input.html", {"request": request})
+@app.get("/settings", response_class=HTMLResponse)
+async def settings(request: Request, user=Depends(manager)):
+    cookie_value = request.cookies.get("access_token")
+    session_state = load_session(token=cookie_value)
+    context = {"request": request, "email": session_state}
 
-
-# @app.post("/htmx-post-user-input", response_class=HTMLResponse)
-# async def htmx_post_user_input(request: Request, user_input: str = Form(...)):
-#     scope = request.scope["htmx"]
-#     print(scope.target)
-#     print(scope.current_url)
-#     print(scope.)
+    return templates.TemplateResponse("settings.html", context, status_code=200)
