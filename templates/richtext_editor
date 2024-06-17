@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rich Text Editor</title>
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <!-- Fontawesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main>
+    <section class="mt-12 lg:mt-20">
+      <div class="container">
+        <h2 class="text-3xl font-semibold text-primary text-center mb-6">Rich Text Editor</h2>
+        <div class="bg-primary bg-opacity-5 px-2 pb-1 max-w-[1000px] mx-auto">
+          <div class="flex flex-wrap gap-6 justify-center sm:justify-between items-center p-4">
+            <div id="box-1" class="flex gap-2 items-center">
+              <i class="fa-solid fa-bold text-white p-2 rounded cursor-pointer" data-element="bold"></i>
+              <i class="fa-solid fa-italic text-white p-2 rounded cursor-pointer" data-element="italic"></i>
+              <i class="fa-solid fa-underline text-white p-2 rounded cursor-pointer" data-element="underline"></i>
+            </div>
+            <div id="box-2" class="flex gap-2 items-center">
+              <i class="fa-solid fa-align-left text-white p-2 rounded cursor-pointer"></i>
+              <i class="fa-solid fa-align-center text-white p-2 rounded cursor-pointer"></i>
+              <i class="fa-solid fa-align-right text-white p-2 rounded cursor-pointer"></i>
+              <i class="fa-solid fa-align-justify text-white p-2 rounded cursor-pointer"></i>
+            </div>
+            <div class="flex gap-2 items-center">
+              <select class="bg-primary bg-opacity-20 rounded p-1 cursor-pointer" name="font-size" id="font-size">
+                <option value="11px" class="bg-primary text-black">11px</option>
+                <option value="12px" class="bg-primary text-black">12px</option>
+                <option value="14px" class="bg-primary text-black">14px</option>
+                <option value="16px" class="bg-primary text-black" selected>16px</option>
+                <option value="18px" class="bg-primary text-black">18px</option>
+                <option value="20px" class="bg-primary text-black">20px</option>
+                <option value="24px" class="bg-primary text-black">24px</option>
+                <option value="28px" class="bg-primary text-black">28px</option>
+                <option value="32px" class="bg-primary text-black">32px</option>
+              </select>
+              <select class="bg-primary bg-opacity-20 rounded p-1 cursor-pointer" name="text-transform" id="text-transform">
+                <option value="initial" class="bg-primary text-black">Default</option>
+                <option value="uppercase" class="bg-primary text-black">Uppercase</option>
+                <option value="lowercase" class="bg-primary text-black">Lowercase</option>
+                <option value="capitalize" class="bg-primary text-black">Capitalize</option>
+              </select>
+              <input class="bg-primary bg-opacity-20 rounded cursor-pointer" type="color" name="color" id="color">
+            </div>
+          </div>
+          <div>
+            <textarea class="resize-none w-full h-72 bg-inherit border p-4" name="text-field" id="text-field">Edit the text here!</textarea>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- JavaScript -->
+  <script src="js/script.js"></script>
+</body>
+</html>
