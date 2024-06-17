@@ -154,12 +154,12 @@ async def home(request: Request, user=Depends(manager)):
 
 @app.get("/richtext_editor", response_class=HTMLResponse)
 async def richtext_editor(request: Request):
-    return templates.TemplateResponse("/richtext_editor", {"request": request})
+    return templates.TemplateResponse("richtext_editor.html", {"request": request})
 
 
 @app.get("/search", response_class=HTMLResponse)
 async def search(request: Request):
-    return templates.TemplateResponse("/search", {"request": request})
+    return templates.TemplateResponse("search.html", {"request": request})
 
 @app.get("/confirm_email", response_class=HTMLResponse)
 async def confirm_email(request: Request, email: str):
