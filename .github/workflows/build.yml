@@ -24,17 +24,23 @@ jobs:
           toolchain: stable
           override: true
 
+      - name: Change directory to markdown-fastapi-rs
+        run: cd markdown-fastapi-rs
+
       - name: Install maturin
         run: pip install maturin
+        working-directory: markdown-fastapi-rs
 
       - name: Build wheels
         run: maturin build --release
+        working-directory: markdown-fastapi-rs
 
       - name: Show contents of target/wheels
         run: ls target/wheels
+        working-directory: markdown-fastapi-rs
 
       - name: Upload wheels as artifacts
         uses: actions/upload-artifact@v3
         with:
           name: wheels
-          path: target/wheels/*.whl
+          path: markdown-fastapi-rs/target/wheels/*.whl
