@@ -17,10 +17,15 @@ from app.backend_json import (
     save_json,
     save_session,
 )
+
+from fastapi.exceptions import RequestValidationError
+from fastapi.exception_handlers import request_validation_exception_handler
 from fastapi_login import LoginManager
 
 from dotenv import load_dotenv
 import os
+
+from app.mkhtml import markdown_to_html
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
@@ -239,6 +244,33 @@ async def htmx_get_fn(request: Request):
         "htmx_value": "this value is inhereted from htmx",
     }
     return components.TemplateResponse("result.html", context)
+
+@app.post("/format-markdown", response_class=HTMLResponse)
+async def format_markdown(
+    request: Request,
+    search: str = Form(...),
+):
+    try:
+        markdown_formatted = markdown_to_html(search)
+        print(markdown_formatted)
+        return HTMLResponse(content=markdown_formatted, status_code=200)
+    except RequestValidationError as e:
+        # Handle the validation error and return an empty response
+        await request_validation_exception_handler(request, e)
+        return HTMLResponse(content="", status_code=200)
+
+
+@app.get("/editor", response_class=HTMLResponse)
+async def editor(request: Request):
+    scope = request.scope["htmx"]
+    # print(scope.target)
+    # print(scope.current_url)
+    context = {
+        "request": request,
+        # "htmx_name": "this is inhereted from htmx",
+        # "htmx_value": "this value is inhereted from htmx",
+    }
+    return templates.TemplateResponse("editor.html", context)
 
 
 @app.get("/settings", response_class=HTMLResponse)

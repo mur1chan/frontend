@@ -101,4 +101,4 @@ def get_skills_and_expertise():
         skills_user.append(skills_expertise[secrange]) 
     return skills_user
 
-# gen_user(99)
+gen_user(1)

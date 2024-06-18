@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Editor{% endblock %}
+{% block content %}
+{% include "/components/header_home.html" %}
+<div class="grid grid-cols-1 sm:grid-cols-2 items-stretch">
+  <div class="p-5 flex flex-col items-start h-full sm:col-span-1">
+    <!-- Links Element (Textarea) -->
+    <h3 class="text-xl font-bold mb-4">
+      Enter Text
+      <!-- <span class="htmx-indicator"> -->
+      <!--   <h6>formatting</h6> -->
+      <!-- </span> -->
+    </h3>
+    <textarea placeholder="Bio" class="textarea textarea-bordered textarea-lg w-full h-full max-w-full resize-none" type="search"
+      name="search" hx-post="/format-markdown" hx-trigger="input changed delay:500ms, search" hx-target="#markdown-preview"
+      hx-indicator=".htmx-indicator"></textarea>
+    <!--TODO
+        handle the 422 error
+    -->
+  </div>
+  <div class="p-5 flex flex-col items-start h-full sm:col-span-1">
+    <!-- Rechts Element (Markdown Preview) -->
+    <h3 class="text-xl font-bold mb-4">Preview</h3>
+    <article id="markdown-preview" class="prose lg:prose-xl w-full h-full bg-white p-4 border border-gray-200 rounded">
+    </article>
+  </div>
+</div>
+{% endblock %}
