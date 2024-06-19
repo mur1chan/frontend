@@ -150,7 +150,7 @@ async def home(request: Request,
     articles_dict = return_article()
     context = {
         "request": request,
-        "title": articles_dict["title"],
+        "title": articles_dict["title_articles"],
         "authors": articles_dict["authors"],
         "abstract": articles_dict["abstract"],
     }
@@ -217,7 +217,7 @@ async def profile(request: Request, profile_id,
         "research_experience": titles_dict["title_1"],
         "education": titles_dict["title_2"],
         "contact_details": titles_dict["title_3"],
-        "title": articles_dict["title"],
+        "title_articles": articles_dict["title_articles"],
         "authors": articles_dict["authors"],
         "abstract": articles_dict["abstract"],
         # "user": user,
@@ -243,7 +243,7 @@ async def my_account(request: Request,
         "research_experience": titles_dict["title_1"],
         "education": titles_dict["title_2"],
         "contact_details": titles_dict["title_3"],
-        "title": articles_dict["title"],
+        "title_articles": articles_dict["title_articles"],
         "authors": articles_dict["authors"],
         "abstract": articles_dict["abstract"],
         # "user": user,
@@ -299,7 +299,7 @@ async def submit_article(
     save_user_articles(title, search)
     context = {
         "request": request,
-        "title": title,
+        "title_articles": title,
         "search": search
         }
     print(title, search)
