@@ -1,11 +1,9 @@
-<!-- templates/index.html -->
-
 {% extends 'base.html' %}
 {% include '/components/header.html' %}
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<div class="bg-base-200 p-8">
+<div class="bg-base-200 p-8" hx-target="this">
   <div class="hero min-h-[80vh]">
     <div class="hero-content flex flex-col lg:flex-row-reverse">
       <!-- Textbereich -->
@@ -16,25 +14,32 @@
 
       <!-- Formular -->
       <div class="card shrink-0 w-full max-w-sm rounded-lg overflow-hidden shadow-lg bg-white lg:w-1/2 mr-auto">
-        <form class="card-body p-6">
-          <div class="form-control mb-4">
+        <form id="login-form" hx-post="/submit-login" hx-trigger="submit" hx-swap="outerHTML" class="card-body p-6 space-y-4">
+          <div>
             <label class="label">
               <span class="label-text">Email</span>
             </label>
-            <input type="email" placeholder="Email" class="input input-bordered w-full" required />
+            <input type="email" name="email" placeholder="Email" aria-label="Email" autocomplete="email" required
+              class="w-full input input-bordered" />
           </div>
-          <div class="form-control mb-4">
+          <div>
             <label class="label">
               <span class="label-text">Password</span>
             </label>
-            <input type="password" placeholder="Password" class="input input-bordered w-full" required />
-            <label class="label">
-              <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
-            </label>
+            <input type="password" name="password" placeholder="Password" aria-label="Password" required
+              class="w-full input input-bordered" />
           </div>
-          <div class="form-control mt-6">
-            <button type="submit" class="btn btn-primary w-full">Login</button>
-          </div>
+          <label class="flex items-center space-x-2">
+            <input type="checkbox" name="option1" class="checkbox checkbox-accent" />
+            <span>Lorem Ipsum unchecked</span>
+          </label>
+          <label class="flex items-center space-x-2">
+            <input type="checkbox" name="option2" checked class="checkbox checkbox-accent" />
+            <span>Lorem Ipsum checked</span>
+          </label>
+          <hr class="border-gray-200" />
+          <p><a href="/register" class="text-blue-500 hover:underline">Noch kein Account?</a></p>
+          <button type="submit" class="btn btn-neutral w-full">Login</button>
         </form>
       </div>
     </div>
