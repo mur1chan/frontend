@@ -159,7 +159,18 @@ async def richtext_editor(request: Request):
 
 @app.get("/search", response_class=HTMLResponse)
 async def search(request: Request):
-    return templates.TemplateResponse("search.html", {"request": request})
+    articles_dict = return_article()
+    titles_dict = return_titles()
+    context = {
+        "request": request,
+        "research_experience": titles_dict["title_1"],
+        "education": titles_dict["title_2"],
+        "contact_details": titles_dict["title_3"],
+        "title": articles_dict["title"],
+        "authors": articles_dict["authors"],
+        "abstract": articles_dict["abstract"],
+    }
+    return templates.TemplateResponse("search.html", context=context)
 
 @app.get("/confirm_email", response_class=HTMLResponse)
 async def confirm_email(request: Request, email: str):
