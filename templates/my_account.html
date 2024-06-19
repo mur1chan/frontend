@@ -9,7 +9,7 @@
     <!-- Links Element -->
     <div>
       <img
-          <img src="data:image/jpeg;charset=utf-8;base64, {{ profile_picture }}"
+          src="data:image/jpeg;charset=utf-8;base64, {{ profile_picture }}"
         alt="Minimal landscape" class="max-w-full h-auto max-h-96 w-auto" />
       <div class="mt-4 space-y-2">
         <hr class="border-gray-200">
@@ -31,17 +31,41 @@
     <h2 class="font-bold text-2xl">{{ name }}</h2>
     <p>Institution</p>
     <p>Bereich</p>
-    <hr class="border-gray-200">
-    <div class="flex mt-4">
-      <img
-        src="https://raw.githubusercontent.com/picocss/examples/master/v2-html-classless/img/aleksandar-jason-a562ZEFKW8I-unsplash-2000x1000.jpg"
-        alt="Minimal landscape" class="w-1/3 h-auto max-h-96 mb-4" />
-      <img
-        src="https://raw.githubusercontent.com/picocss/examples/master/v2-html-classless/img/aleksandar-jason-a562ZEFKW8I-unsplash-2000x1000.jpg"
-        alt="Minimal landscape" class="w-1/3 h-auto max-h-96 mb-4" />
-      <img
-        src="https://raw.githubusercontent.com/picocss/examples/master/v2-html-classless/img/aleksandar-jason-a562ZEFKW8I-unsplash-2000x1000.jpg"
-        alt="Minimal landscape" class="w-1/3 h-auto max-h-96 mb-4" />
+    <hr class="border-gray-200" style="margin-bottom: 16px;">
+    <div class="flex space-x-4">
+      <div class="stat">
+        <div class="stat-figure text-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current"><path
+              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </div>
+        <div class="stat-title">Downloads</div>
+        <div class="stat-value">31K</div>
+        <div class="stat-desc">Jan 1st - Feb 1st</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-figure text-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current"><path
+              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0
+                100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+        </div>
+        <div class="stat-title">New Users</div>
+        <div class="stat-value">4,200</div>
+        <div class="stat-desc">↗︎ 400 (22%)</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-figure text-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current"><path
+              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+        </div>
+        <div class="stat-title">New Registers</div>
+        <div class="stat-value">1,200</div>
+        <div class="stat-desc">↘︎ 90 (14%)</div>
+      </div>
     </div>
     <hr class="border-gray-200">
     <div class="mt-4">
@@ -55,6 +79,104 @@
   </div>
   <div class="p-5 flex items-start justify-center h-full sm:col-span-1">
     <!-- Rechts Element -->
+    <div>
+      <h4 class="font-bold">Following</h4>
+      <hr class="border-gray-200" style="margin-bottom: 16px;">
+      <div class="avatar-group flex -space-x-4 rtl:space-x-reverse">
+        <div class="avatar">
+          <div class="w-8 h-8">
+            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" class="rounded-full" />
+          </div>
+        </div>
+        <div class="avatar">
+          <div class="w-8 h-8">
+            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" class="rounded-full" />
+          </div>
+        </div>
+        <div class="avatar">
+          <div class="w-8 h-8">
+            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" class="rounded-full" />
+          </div>
+        </div>
+        <div class="avatar">
+          <div class="w-8 h-8">
+            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" class="rounded-full" />
+          </div>
+        </div>
+      </div>
+      <div class="text-right mb-4">
+        <a href="#" class="link link-neutral">Show all</a>
+      </div>
+
+      <h4 class="font-bold">Followers</h4>
+      <hr class="border-gray-200" style="margin-bottom: 16px;">
+      <div class="avatar-group flex -space-x-4 rtl:space-x-reverse">
+        <div class="avatar">
+          <div class="w-8 h-8">
+            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" class="rounded-full" />
+          </div>
+        </div>
+        <div class="avatar">
+          <div class="w-8 h-8">
+            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" class="rounded-full" />
+          </div>
+        </div>
+        <div class="avatar">
+          <div class="w-8 h-8">
+            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" class="rounded-full" />
+          </div>
+        </div>
+        <div class="avatar">
+          <div class="w-8 h-8">
+            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" class="rounded-full" />
+          </div>
+        </div>
+      </div>
+      <div class="text-right mb-16">
+        <a href="#" class="link link-neutral">Show all</a>
+      </div>
+      <div style="margin-top: 24px;">
+        <h4 class="font-bold">Groups</h4>
+        <hr class="border-gray-200" style="margin-bottom: 16px;">
+        <div class="flex flex-col space-y-4"> <!-- flex-col and space-y-4 for vertical spacing -->
+        <div class="flex items-center gap-3">
+          <div class="avatar">
+            <div class="mask mask-none w-12 h-12">
+              <img src="https://img.daisyui.com/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
+            </div>
+          </div>
+          <div>
+            <div class="font-bold">Lorem Impsum</div>
+            <div class="text-sm opacity-50">x members</div>
+          </div>
+        </div>        
+        <div class="flex items-center gap-3">
+          <div class="avatar">
+            <div class="mask mask-none w-12 h-12">
+              <img src="https://img.daisyui.com/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
+            </div>
+          </div>
+          <div>
+            <div class="font-bold">Lorem Impsum</div>
+            <div class="text-sm opacity-50">x members</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="avatar">
+            <div class="mask mask-none w-12 h-12">
+              <img src="https://img.daisyui.com/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
+            </div>
+          </div>
+          <div>
+            <div class="font-bold">Lorem Impsum</div>
+            <div class="text-sm opacity-50">x members</div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
 </div>
 {% endblock %}
+
