@@ -1,10 +1,101 @@
-<!-- templates/index.html -->
-
+<!--- templates/profile.html --->
 {% extends 'base.html' %}
-{% include '/components/header_home.html' %}
-{% block title %}Home{% endblock %}
+{% block title %}Profile{% endblock %}
+{% block content%}
+{% include "/components/header_home.html" %}
+<div class="grid grid-cols-1 sm:grid-cols-4 items-stretch">
+  <div class="p-5 flex items-start justify-center h-full sm:col-span-1">
+    <!-- Links Element -->
+    <div>
+        <img src="https://raw.githubusercontent.com/picocss/examples/master/v2-html-classless/img/aleksandar-jason-a562ZEFKW8I-unsplash-2000x1000.jpg"
+          alt="Minimal landscape" class="max-w-full h-auto max-h-96 w-auto" />
+          <div class="bg-gray-100 p-8">
+            <ul class="menu bg-base-200 w-56 rounded-box">
+                <li><a>Item 1</a></li>
+                <li><a>Item 2</a></li>
+                <li><a>Item 3</a></li>
+              </ul>
+          </div> 
+          
+      </div>
+  </div>
+  <div class="p-5 flex flex-col items-start h-full sm:col-span-2">
+    <!-- Element Mitte -->
+    <p><small>Breadcrumb</small></p>
+    <h2 class="font-bold text-2xl">Artikel Titel</h2>
+    <p><small>Autoren und Veröffentlichung</small><strong>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+        Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</strong></p>
+        <hr class="border-gray-200">
 
-{% block content %}
 
+  </div>
+  <div class="p-5 flex items-start justify-center h-full sm:col-span-1">
+    <!-- Rechts Element -->
+    
+      <div>
+        <h4 class="font-bold">Related Articles</h4>
+        <hr class="border-gray-200" style="margin-bottom: 16px;">
+        <div class="flex flex-col space-y-4"> <!-- flex-col and space-y-4 for vertical spacing -->
+        <div class="flex items-center gap-3">
+          <div class="avatar">
+            <div class="mask mask-none w-12 h-12">
+              <img src="https://img.daisyui.com/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
+            </div>
+          </div>
+          <div>
+            <div class="font-bold">Lorem Impsum</div>
+          </div>
+        </div>        
+        <div class="flex items-center gap-3">
+          <div class="avatar">
+            <div class="mask mask-none w-12 h-12">
+              <img src="https://img.daisyui.com/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
+            </div>
+          </div>
+          <div>
+            <div class="font-bold">Lorem Impsum</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="avatar">
+            <div class="mask mask-none w-12 h-12">
+              <img src="https://img.daisyui.com/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
+            </div>
+          </div>
+          <div>
+            <div class="font-bold">Lorem Impsum</div>
+          </div>
+        </div>
+        </div>
 
+        <div style="margin-top: 24px;">
+            <h4 class="font-bold">Subjects</h4>
+            <hr class="border-gray-200" style="margin-bottom: 16px;">
+            <div class="flex gap-4">
+              <button class="btn no-animation">Subject 1</button>
+              <button class="btn no-animation">Subject 2</button>
+              <button class="btn no-animation">Subject 3</button>
+            </div>
+          </div>
+        
+        <div style="margin-top: 24px;">
+          <div role="tablist" class="tabs tabs-lifted">
+            <input type="tab" name="my_tabs_2" role="tab" class="tab" aria-label="Tab 1" />
+            <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">Tab content 1</div>
+          
+            <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Tab 2" checked />
+            <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">Tab content 2</div>
+          
+            <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Tab 3" />
+            <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">Tab content 3</div>
+          </div>
+        </div>
+          
+    
+
+    
+  </div>
+  </div>
+</div>
 {% endblock %}
+
