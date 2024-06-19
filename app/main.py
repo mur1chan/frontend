@@ -1,20 +1,17 @@
-from typing import Optional, Union
 
 from fastapi import Cookie, Depends, FastAPI, Form, HTTPException, Header, Response
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from asgi_htmx import HtmxMiddleware
 from asgi_htmx import HtmxRequest as Request
 from app.backend_json import (
     load_profile,
     load_session,
-    login_user,
     register_user,
     return_article,
     return_titles,
     load_json,
-    save_json,
     save_session,
 )
 
@@ -46,7 +43,6 @@ DB = load_json("users.json")
 
 @manager.user_loader()
 def load_user(email: str):
-    # Return user dictionary if user with the email exists
     for user in DB.values():
         if user["email"] == email:
             return user
@@ -59,7 +55,6 @@ async def http_exception_handler(request: Request, exc: HTTPException):
         return templates.TemplateResponse(
             "invalid_credentials.html", {"request": request}, status_code=401
         )
-    # You can add more conditions here to handle other status codes
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -255,7 +250,6 @@ async def format_markdown(
         print(markdown_formatted)
         return HTMLResponse(content=markdown_formatted, status_code=200)
     except RequestValidationError as e:
-        # Handle the validation error and return an empty response
         await request_validation_exception_handler(request, e)
         return HTMLResponse(content="", status_code=200)
 
