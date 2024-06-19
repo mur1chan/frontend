@@ -3,67 +3,6 @@
 {% block title %}Profile{% endblock %}
 {% block content%}
 {% include "/components/header_home.html" %}
-<style>
-  .avatar-group {
-    display: flex;
-    margin-left: -16px;
-  }
-  .avatar {
-    margin-left: -8px;
-    z-index: 1;
-  }
-  .avatar img {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    border: 2px solid white;
-  }
-  .avatar:nth-child(1) { z-index: 4; }
-  .avatar:nth-child(2) { z-index: 3; }
-  .avatar:nth-child(3) { z-index: 2; }
-  .avatar:nth-child(4) { z-index: 1; }
-
-  .stats {
-    display: flex;
-    gap: 16px; /* Abstand zwischen den stat-Elementen */
-    padding: 16px;
-    background: white;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-  }
-
-  .stat {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 16px;
-    background: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-  }
-
-  .stat-figure {
-    margin-bottom: 8px;
-  }
-
-  .stat-title {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-
-  .stat-value {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-
-  .stat-desc {
-    font-size: 0.875rem;
-    color: #666;
-  }
-</style>
 <div class="grid grid-cols-1 sm:grid-cols-4 items-stretch">
   <div class="p-5 flex items-start justify-center h-full sm:col-span-1">
     <!-- Links Element -->
@@ -139,7 +78,7 @@
   </div>
   <div class="p-5 flex items-start justify-center h-full sm:col-span-1">
     <!-- Rechts Element -->
-    <div>
+ <div>
       <h4 class="font-bold">Following</h4>
       <hr class="border-gray-200" style="margin-bottom: 16px;">
       <div class="avatar-group flex -space-x-4 rtl:space-x-reverse">
