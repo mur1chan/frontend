@@ -2,50 +2,46 @@
 
 {% extends 'base.html' %}
 {% include '/components/header.html' %}
-
 {% block title %}Home{% endblock %}
 
-
-
 {% block content %}
-<div class="grid grid-cols-1 xl:grid-cols-2 gap-4 px-2.5 py-4 border-4">
-  <div class="w-full h-auto rounded-xl p-6 m-auto bg-white shadow-md ring-2 ring-gray-800 ring-opacity-50">
-    <h1 class="text-3xl font-semibold text-center text-gray-700">Anmelden</h1>
-    <form class="space-y-4 mt-6">
-      <div>
-        <button class="btn btn-block">block</button>      
+<div class="bg-base-200 p-8">
+  <div class="hero min-h-[80vh]">
+    <div class="hero-content flex flex-col lg:flex-row">
+      <!-- Textbereich -->
+      <div class="text-left lg:text-left w-full lg:w-1/2 mb-4 lg:mb-0">
+        <h1 class="text-5xl font-bold">Login now!</h1>
+        <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
       </div>
-      <div>
-        <button class="btn btn-block">block</button>      
+
+      <!-- Formular -->
+      <div class="card shrink-0 w-full max-w-sm rounded-lg overflow-hidden shadow-lg bg-white lg:w-1/2 ml-auto">
+        <form class="card-body p-6">
+          <div class="form-control mb-4">
+            <label class="label">
+              <span class="label-text">Email</span>
+            </label>
+            <input type="email" placeholder="Email" class="input input-bordered w-full" required />
+          </div>
+          <div class="form-control mb-4">
+            <label class="label">
+              <span class="label-text">Password</span>
+            </label>
+            <input type="password" placeholder="Password" class="input input-bordered w-full" required />
+            <label class="label">
+              <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
+            </label>
+          </div>
+          <div class="form-control mt-6">
+            <button type="submit" class="btn btn-primary w-full">Login</button>
+          </div>
+        </form>
       </div>
-      <div>
-        <button class="btn btn-block">block</button>      
-      </div>
-      <div class="flex items-center justify-center space-x-4">
-        <div class="border-t border-gray-300 flex-grow"></div>
-        <span class="text-lg font-bold text-gray-500">ODER</span>
-        <div class="border-t border-gray-300 flex-grow"></div>
-      </div>
-      <div>
-        <label class="label">
-          <span class="text-base label-text">Email</span>
-        </label>
-        <input type="text" placeholder="Email Address" class="w-full input input-bordered" />
-      </div>
-      <div>
-        <label class="label">
-          <span class="text-base label-text">Password</span>
-        </label>
-        <input type="password" placeholder="Enter Password" class="w-full input input-bordered" />
-      </div>
-      <a href="#" class="text-xs text-gray-600 hover:underline hover:text-blue-600">Forget Password?</a>
-      <div>
-        <button class="btn-neutral btn btn-block">Login</button>
-      </div>
-    </form>
-  </div>
-  <div class="w-full h-64 bg-gray-300 rounded-xl">
-    <div class="skeleton w-full h-full"></div>
+    </div>
   </div>
 </div>
+
+
+
+
 {% endblock %}
