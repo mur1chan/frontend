@@ -1,16 +1,91 @@
 {% block content%}
 {% include "/components/header_home.html" %}
-<div class="mx-5 mt-10 flex flex-col h-full items-center justify-center">
-  <div class="flex-1 flex flex-col max-w-xl items-center justify-center"> 
-    {% include "/components/publication.html" %}
-    <hr class="border-gray-200">
+
+
+<div class="grid grid-cols-1 sm:grid-cols-4 items-stretch">
+  <div class="p-5 flex items-start justify-center h-full sm:col-span-1">
+    <!-- Links Element -->
     <div>
-      <h2 class="text-2xl font-bold">Publikationen</h2>
-      <p class="text-gray-600">Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.</p>
+      <img src="https://raw.githubusercontent.com/picocss/examples/master/v2-html-classless/img/aleksandar-jason-a562ZEFKW8I-unsplash-2000x1000.jpg"
+        alt="Minimal landscape" class="max-w-full h-auto max-h-96 w-auto" />
+        <div class="bg-gray-100 p-8">
+          <ul class="menu bg-base-200 w-56 rounded-box shadow-lg">
+            <li><a class="block py-2 px-4 text-gray-800">Item 1</a></li>
+            <li class="relative">
+                <details open>
+                    <summary class="py-2 px-4 text-gray-800 cursor-pointer">Parent</summary>
+                    <ul class="ml-2">
+                        <li><a class="block py-2 px-4 text-gray-600 hover:bg-gray-200">Submenu 1</a></li>
+                        <li><a class="block py-2 px-4 text-gray-600 hover:bg-gray-200">Submenu 2</a></li>
+                        <li class="relative">
+                            <details open>
+                                <summary class="py-2 px-4 text-gray-800 cursor-pointer">Parent</summary>
+                                <ul class="ml-2">
+                                    <li><a class="block py-2 px-4 text-gray-600 hover:bg-gray-200">Submenu 1</a></li>
+                                    <li><a class="block py-2 px-4 text-gray-600 hover:bg-gray-200">Submenu 2</a></li>
+                                </ul>
+                            </details>
+                        </li>
+                    </ul>
+                </details>
+            </li>
+            <li><a class="block py-2 px-4 text-gray-800">Item 3</a></li>
+        </ul>
+        </div> 
+        
     </div>
-    <blockquote class="p-4 italic border-l-4 bg-neutral-focus text-neutral-content">
-      Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.
-    </blockquote>
   </div>
-</div>
+  <div class="p-5 flex flex-col items-start h-full sm:col-span-2">
+    <!-- Element Mitte -->
+    <div class="text-sm breadcrumbs">
+      <ul class="flex space-x-2">
+        <li class="relative flex items-center">
+          <a href="#">Home</a>
+          <!--<span class="mx-2 text-gray-400">></span>-->
+        </li>
+        <li class="relative flex items-center">
+          <a href="#">Publikationen</a>
+          <!--<span class="mx-2 text-gray-400">></span>-->
+        </li>
+        <li class="relative flex items-center">
+          Suche
+        </li>
+      </ul>
+    </div>
+    <h2 class="font-bold text-2xl">Publication Search</h2>
+    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, 
+      sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+      sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+    <p><small>Find matching publications by keywords</small></p>
+      <div class="flex items-center border rounded-lg overflow-hidden">
+        <input class="input flex-grow input-bordered border-none" placeholder="Search" />
+        <div class="relative">
+          <button class="btn btn-primary rounded-none">Search</button>
+        </div>
+      </div>
+      <p><small>Displaying x - x of x results</small></p>
+      
+
+    <hr class="border-gray-200">
+    <div class="mt-8">
+      {% include "/components/publication.html" %}
+      <hr class="border-gray-200 my-8">
+      {% include "/components/publication.html" %}
+      <hr class="border-gray-200 my-8">
+      {% include "/components/publication.html" %}
+
+    </div>
+    <div class="mt-8 flex justify-center">
+      <div class="inline-flex join">
+        <button class="join-item btn">1</button>
+        <button class="join-item btn btn-active">2</button>
+        <button class="join-item btn">3</button>
+        <button class="join-item btn">4</button>
+      </div>
+    </div>
+    
+    
+    
+  </div>
+  
 {% endblock %}

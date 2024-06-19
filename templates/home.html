@@ -1,91 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
 {% block content%}
 {% include "/components/header_home.html" %}
 
-
-<div class="grid grid-cols-1 sm:grid-cols-4 items-stretch">
-  <div class="p-5 flex items-start justify-center h-full sm:col-span-1">
-    <!-- Links Element -->
-    <div>
-      <img src="https://raw.githubusercontent.com/picocss/examples/master/v2-html-classless/img/aleksandar-jason-a562ZEFKW8I-unsplash-2000x1000.jpg"
-        alt="Minimal landscape" class="max-w-full h-auto max-h-96 w-auto" />
-        <div class="bg-gray-100 p-8">
-          <ul class="menu bg-base-200 w-56 rounded-box shadow-lg">
-            <li><a class="block py-2 px-4 text-gray-800">Item 1</a></li>
-            <li class="relative">
-                <details open>
-                    <summary class="py-2 px-4 text-gray-800 cursor-pointer">Parent</summary>
-                    <ul class="ml-2">
-                        <li><a class="block py-2 px-4 text-gray-600 hover:bg-gray-200">Submenu 1</a></li>
-                        <li><a class="block py-2 px-4 text-gray-600 hover:bg-gray-200">Submenu 2</a></li>
-                        <li class="relative">
-                            <details open>
-                                <summary class="py-2 px-4 text-gray-800 cursor-pointer">Parent</summary>
-                                <ul class="ml-2">
-                                    <li><a class="block py-2 px-4 text-gray-600 hover:bg-gray-200">Submenu 1</a></li>
-                                    <li><a class="block py-2 px-4 text-gray-600 hover:bg-gray-200">Submenu 2</a></li>
-                                </ul>
-                            </details>
-                        </li>
-                    </ul>
-                </details>
-            </li>
-            <li><a class="block py-2 px-4 text-gray-800">Item 3</a></li>
-        </ul>
-        </div> 
-        
-    </div>
-  </div>
-  <div class="p-5 flex flex-col items-start h-full sm:col-span-2">
-    <!-- Element Mitte -->
-    <div class="text-sm breadcrumbs">
-      <ul class="flex space-x-2">
-        <li class="relative flex items-center">
-          <a href="#">Home</a>
-          <!--<span class="mx-2 text-gray-400">></span>-->
-        </li>
-        <li class="relative flex items-center">
-          <a href="#">Publikationen</a>
-          <!--<span class="mx-2 text-gray-400">></span>-->
-        </li>
-        <li class="relative flex items-center">
-          Suche
-        </li>
-      </ul>
-    </div>
-    <h2 class="font-bold text-2xl">Publication Search</h2>
-    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, 
-      sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-      sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-    <p><small>Find matching publications by keywords</small></p>
-      <div class="flex items-center border rounded-lg overflow-hidden">
-        <input class="input flex-grow input-bordered border-none" placeholder="Search" />
-        <div class="relative">
-          <button class="btn btn-primary rounded-none">Search</button>
-        </div>
+<div  class="bg-gray-100 h-screen flex justify-center items-center">
+  <div class="flex flex-col items-center gap-8">
+      <div class="flex flex-col gap-4 w-52">
+          <div class="skeleton h-32 w-full"></div>
+          <div class="skeleton h-4 w-28"></div>
+          <div class="skeleton h-4 w-full"></div>
+          <div class="skeleton h-4 w-full"></div>
       </div>
-      <p><small>Displaying x - x of x results</small></p>
-      
-
-    <hr class="border-gray-200">
-    <div class="mt-8">
-      {% include "/components/publication.html" %}
-      <hr class="border-gray-200 my-8">
-      {% include "/components/publication.html" %}
-      <hr class="border-gray-200 my-8">
-      {% include "/components/publication.html" %}
-
-    </div>
-    <div class="mt-8 flex justify-center">
-      <div class="inline-flex join">
-        <button class="join-item btn">1</button>
-        <button class="join-item btn btn-active">2</button>
-        <button class="join-item btn">3</button>
-        <button class="join-item btn">4</button>
+      <div role="alert" class="alert alert-warning flex items-center space-x-2 p-4 rounded bg-yellow-200 text-yellow-800">
+          <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+          <span>Hier kommen demnächst neue Inhalte!</span>
       </div>
-    </div>
-    
-    
-    
   </div>
-  
+</div>
+
+
 {% endblock %}
