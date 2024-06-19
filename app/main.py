@@ -265,6 +265,19 @@ async def format_markdown(
         return HTMLResponse(content="", status_code=200)
 
 
+@app.post("/submit-article", response_class=HTMLResponse)
+async def submit_article(
+    request: Request,
+    search: str = Form(...),
+):
+    try:
+        markdown_formatted = markdown_to_html(search)
+        print(markdown_formatted)
+        return HTMLResponse(content=markdown_formatted, status_code=200)
+    except RequestValidationError as e:
+        await request_validation_exception_handler(request, e)
+        return HTMLResponse(content="", status_code=200)
+
 @app.get("/editor", response_class=HTMLResponse)
 async def editor(request: Request):
     scope = request.scope["htmx"]

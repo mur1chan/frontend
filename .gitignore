@@ -1,9 +1,9 @@
 .venv/
 node_modules/ 
-users.json
-users.json
 *.pyc
+# ignore users and session
 users.json
+session.json
 # Devenv
 .devenv*
 devenv.local.nix
