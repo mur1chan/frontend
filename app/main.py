@@ -302,3 +302,7 @@ async def settings(request: Request, user=Depends(manager)):
     context = {"request": request, "email": session_state}
 
     return templates.TemplateResponse("settings.html", context, status_code=200)
+
+@app.get("/articles", response_class=HTMLResponse)
+async def articles(request: Request):
+    return templates.TemplateResponse("articles.html", {"request": request})
