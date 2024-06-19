@@ -13,6 +13,7 @@ from app.backend_json import (
     return_titles,
     load_json,
     save_session,
+    save_user_articles,
 )
 
 from fastapi.exceptions import RequestValidationError
@@ -268,18 +269,21 @@ async def format_markdown(
 @app.post("/submit-article", response_class=HTMLResponse)
 async def submit_article(
     request: Request,
+
+    title: str = Form(...),
     search: str = Form(...),
 ):
-    try:
-        markdown_formatted = markdown_to_html(search)
-        print(markdown_formatted)
-        return HTMLResponse(content=markdown_formatted, status_code=200)
-    except RequestValidationError as e:
-        await request_validation_exception_handler(request, e)
-        return HTMLResponse(content="", status_code=200)
+    save_user_articles(title, search)
+    context = {
+        "request": request,
+        "title": title,
+        "search": search
+        }
+    print(title, search)
+    # return templates.TemplateResponse("editor.html", context=context) 
 
 @app.get("/editor", response_class=HTMLResponse)
-async def editor(request: Request):
+async def editor(request: Request): 
     scope = request.scope["htmx"]
     # print(scope.target)
     # print(scope.current_url)

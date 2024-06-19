@@ -37,7 +37,7 @@ def register_user(name: str, email: str, password: str) -> bool:
         "password": password,
         "profile_picture": "",
         "topics": [],
-        "skills": []
+        "skills": [],
     }
     save_json("users.json", register_dict)
     print(f"{email} registered successfully")
@@ -95,3 +95,11 @@ def return_article():
 def return_titles():
     titles_dict = load_json("titles.json")
     return titles_dict
+
+
+def save_user_articles(title: str, article_body: str):
+    users_articles_dict = load_json("users_articles.json")
+    new_index = str(len(users_articles_dict))
+
+    users_articles_dict[new_index] = {"title": title, "article_body": article_body}
+    save_json("users_articles.json", users_articles_dict)
