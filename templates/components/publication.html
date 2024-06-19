@@ -1,19 +1,18 @@
 <!-- templates/components/publication.html -->
-{% extends 'base.html' %}
-
-{% block title %}
-{{ title }}
-{% endblock %}
 {% block content %}
+
+{% for publication in publications %}
+
+
 <article id="article" class="p-4 rounded bg-white shadow">
-  <h3 class="text-xl font-bold">{{ title }}</h3>
+  <h3 class="text-xl font-bold">{{publication.title_articles}}</h3>
   <p class="text-sm text-gray-500 mt-2"><em>Autoren: 
-    {% for author in authors %} 
-    {{ author }}
-    {% endfor %}
+  {% for author in publication.authors %}
+    {{author}}
+  {% endfor %}
   </em></p>
   <blockquote class="mt-4 border-l-4 border-gray-200 pl-4">
-    {{ abstract }}
+    {{publication.abstract}}
   </blockquote>
   <p class="mt-4">
     <a href="#" onclick="event.preventDefault()" class="text-xs font-bold text-indigo-500 hover:underline">
@@ -24,4 +23,7 @@
     <small>Duis nec elit placerat, suscipit nibh quis, finibus neque.</small>
   </footer>
 </article>
+<hr class="border-gray-200" style="margin-bottom: 16px;">
+{% endfor %}
 {% endblock %}
+

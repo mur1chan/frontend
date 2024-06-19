@@ -58,7 +58,8 @@
       sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
     <p><small>Find matching publications by keywords</small></p>
       <div class="flex items-center border rounded-lg overflow-hidden">
-        <input class="input flex-grow input-bordered border-none" placeholder="Search" />
+        <input  type="search" hx-post="/search" hx-trigger="input changed delay:500ms, search" hx-target="#search-results"  
+     class="form-control input flex-grow input-bordered border-none" placeholder="Search" />
         <div class="relative">
           <button class="btn btn-primary rounded-none">Search</button>
         </div>
@@ -67,12 +68,14 @@
       
 
     <hr class="border-gray-200">
-    <div class="mt-8">
+
+    <div class="mt-8" id="search-results">
+    {% for  in  %}    
       {% include "/components/publication.html" %}
       <hr class="border-gray-200 my-8">
-      {% include "/components/publication.html" %}
-      <hr class="border-gray-200 my-8">
-      {% include "/components/publication.html" %}
+    {% endfor %}
+
+    </div>
 
     </div>
     <div class="mt-8 flex justify-center">
