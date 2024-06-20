@@ -35,41 +35,48 @@
     <div class="flex space-x-4">
       <div class="stat">
         <div class="stat-figure text-secondary">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current"><path
+          <!--<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current"><path
               stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>-->
         </div>
-        <div class="stat-title">Downloads</div>
-        <div class="stat-value">31K</div>
-        <div class="stat-desc">Jan 1st - Feb 1st</div>
+        <div class="stat-title">Publikationen</div>
+        <div class="stat-value">31</div>
       </div>
 
       <div class="stat">
         <div class="stat-figure text-secondary">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current"><path
+          <!--<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current"><path
               stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0
-                100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>-->
         </div>
-        <div class="stat-title">New Users</div>
+        <div class="stat-title">Ansichten</div>
         <div class="stat-value">4,200</div>
-        <div class="stat-desc">↗︎ 400 (22%)</div>
       </div>
 
       <div class="stat">
         <div class="stat-figure text-secondary">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current"><path
+          <!--<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current"><path
               stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+              d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg> -->
         </div>
-        <div class="stat-title">New Registers</div>
+        <div class="stat-title">Downloads</div>
         <div class="stat-value">1,200</div>
-        <div class="stat-desc">↘︎ 90 (14%)</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-figure text-secondary">
+          <!--<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current"><path
+              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>-->
+        </div>
+        <div class="stat-title">Erwähnungen</div>
+        <div class="stat-value">1,000</div>
       </div>
     </div>
     <hr class="border-gray-200">
     <div class="mt-4">
-      <h2 class="font-bold text-2xl">Publikationen</h2>
+      <h2 class="font-bold text-2xl">Aktuelle Publikationen</h2>
       {% include "/components/publication.html" %}
       <hr class="border-gray-200">
       {% include "/components/research_experience.html" %}
@@ -80,7 +87,10 @@
   <div class="p-5 flex items-start justify-center h-full sm:col-span-1">
     <!-- Rechts Element -->
     <div>
-      <h4 class="font-bold">Following</h4>
+      <div>
+        <button class="btn btn-neutral">Artikel erstellen</button>
+      </div>
+      <h4 class="font-bold" style="margin-top: 24px" >Following</h4>
       <hr class="border-gray-200" style="margin-bottom: 16px;">
       <div class="avatar-group flex -space-x-4 rtl:space-x-reverse">
         <div class="avatar">
@@ -179,4 +189,3 @@
   </div>
 </div>
 {% endblock %}
-
