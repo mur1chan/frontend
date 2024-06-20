@@ -176,7 +176,6 @@ async def search(request: Request):
     }
     return templates.TemplateResponse("search.html", context=context)
 
-# TODO
 @app.post("/search-publications")
 async def search_publications(request: Request,
                               search: str = Form(...)):
@@ -223,7 +222,7 @@ async def profile(request: Request, profile_id,
         # "user": user,
     }
     return templates.TemplateResponse("profile.html", context)
-
+# TODO
 @app.get("/my-account", response_class=HTMLResponse)
 async def my_account(request: Request, 
                      # user=Depends(manager)
@@ -233,6 +232,9 @@ async def my_account(request: Request,
     # email = load_session(token=cookie_value)
     user = load_user()
     articles_dict = return_article()
+    publications = []
+    publications.append(articles_dict)
+    print(publications)
     titles_dict = return_titles()
     context = {
         "request": request,
@@ -243,9 +245,7 @@ async def my_account(request: Request,
         "research_experience": titles_dict["title_1"],
         "education": titles_dict["title_2"],
         "contact_details": titles_dict["title_3"],
-        "title_articles": articles_dict["title_articles"],
-        "authors": articles_dict["authors"],
-        "abstract": articles_dict["abstract"],
+        "publications": publications
         # "user": user,
     }
     return templates.TemplateResponse("my_account.html", context)
