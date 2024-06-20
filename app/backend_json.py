@@ -103,3 +103,23 @@ def save_user_articles(title: str, article_body: str):
 
     users_articles_dict[new_index] = {"title": title, "article_body": article_body}
     save_json("users_articles.json", users_articles_dict)
+
+def search_articles(query: str) -> List[Dict]:
+    """
+    Search articles by author, abstract, or title.
+
+    :param query: The search query string.
+    :return: A list of matching articles.
+    """
+    articles_dict = load_json("articles.json")
+    matching_articles = []
+
+    for article_id, article_data in articles_dict.items():
+        author = article_data.get("author", "")
+        abstract = article_data.get("abstract", "")
+        title_articles = article_data.get("title_articles", "")
+
+        if query.lower() in author.lower() or query.lower() in abstract.lower() or query.lower() in title_articles.lower():
+            matching_articles.append(article_data)
+
+    return matching_articles

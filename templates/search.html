@@ -1,7 +1,6 @@
-{% block content%}
+{% extends 'base.html' %}
 {% include "/components/header_home.html" %}
-
-
+{% block content %}
 <div class="grid grid-cols-1 sm:grid-cols-4 items-stretch">
   <div class="p-5 flex items-start justify-center h-full sm:col-span-1">
     <!-- Links Element -->
@@ -32,7 +31,6 @@
             <li><a class="block py-2 px-4 text-gray-800">Item 3</a></li>
         </ul>
         </div> 
-        
     </div>
   </div>
   <div class="p-5 flex flex-col items-start h-full sm:col-span-2">
@@ -41,11 +39,9 @@
       <ul class="flex space-x-2">
         <li class="relative flex items-center">
           <a href="#">Home</a>
-          <!--<span class="mx-2 text-gray-400">></span>-->
         </li>
         <li class="relative flex items-center">
           <a href="#">Publikationen</a>
-          <!--<span class="mx-2 text-gray-400">></span>-->
         </li>
         <li class="relative flex items-center">
           Suche
@@ -58,34 +54,15 @@
       sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
     <p><small>Find matching publications by keywords</small></p>
       <div class="flex items-center border rounded-lg overflow-hidden">
-        <input class="input flex-grow input-bordered border-none" placeholder="Search" />
-        <div class="relative">
-          <button class="btn btn-primary rounded-none">Search</button>
-        </div>
+        <input name="search" type="search" class="input flex-grow input-bordered border-none" placeholder="Search" hx-post="/search-publications" hx-trigger="input changed delay:0ms, search" hx-target="#search-results"/>
       </div>
-      <p><small>Displaying x - x of x results</small></p>
-      
+    <p><small>Displaying {{ results|length }} results</small></p>
 
     <hr class="border-gray-200">
-    <div class="mt-8">
-      {% include "/components/publication.html" %}
-      <hr class="border-gray-200 my-8">
-      {% include "/components/publication.html" %}
-      <hr class="border-gray-200 my-8">
-      {% include "/components/publication.html" %}
-
+    <div class="mt-8" id="search-results">
+       {% include "/components/publication.html" %} 
+    <hr class="border-gray-200 my-8"> 
     </div>
-    <div class="mt-8 flex justify-center">
-      <div class="inline-flex join">
-        <button class="join-item btn">1</button>
-        <button class="join-item btn btn-active">2</button>
-        <button class="join-item btn">3</button>
-        <button class="join-item btn">4</button>
-      </div>
-    </div>
-    
-    
-    
   </div>
-  
+</div>
 {% endblock %}

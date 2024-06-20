@@ -14,6 +14,7 @@ from app.backend_json import (
     load_json,
     save_session,
     save_user_articles,
+    search_articles,
 )
 
 from fastapi.exceptions import RequestValidationError
@@ -43,7 +44,7 @@ DB = load_json("users.json")
 
 
 @manager.user_loader()
-def load_user(email: str):
+def load_user(email: str = "gwashington@example.net"):
     for user in DB.values():
         if user["email"] == email:
             return user
@@ -143,11 +144,13 @@ async def register(request: Request):
 
 
 @app.get("/home", response_class=HTMLResponse)
-async def home(request: Request, user=Depends(manager)):
+async def home(request: Request, 
+               # user=Depends(manager)
+               ):
     articles_dict = return_article()
     context = {
         "request": request,
-        "title": articles_dict["title"],
+        "title": articles_dict["title_articles"],
         "authors": articles_dict["authors"],
         "abstract": articles_dict["abstract"],
     }
@@ -167,11 +170,27 @@ async def search(request: Request):
         "research_experience": titles_dict["title_1"],
         "education": titles_dict["title_2"],
         "contact_details": titles_dict["title_3"],
-        "title": articles_dict["title"],
+        "title": articles_dict["title_articles"],
         "authors": articles_dict["authors"],
         "abstract": articles_dict["abstract"],
     }
     return templates.TemplateResponse("search.html", context=context)
+
+# TODO
+@app.post("/search-publications")
+async def search_publications(request: Request,
+                              search: str = Form(...)):
+    try:
+        publications = search_articles(search)
+        print(type(publications))
+        context = {
+                "request": request,
+                "publications": publications
+                } 
+        return templates.TemplateResponse("/components/publication.html", context=context)
+    except RequestValidationError as e:
+        await request_validation_exception_handler(request, e)
+        return HTMLResponse(content="", status_code=200)
 
 @app.get("/confirm_email", response_class=HTMLResponse)
 async def confirm_email(request: Request, email: str):
@@ -181,7 +200,9 @@ async def confirm_email(request: Request, email: str):
 
 
 @app.get("/profile/{profile_id}", response_class=HTMLResponse)
-async def profile(request: Request, profile_id, user=Depends(manager)):
+async def profile(request: Request, profile_id, 
+                  # user=Depends(manager)
+                  ):
     print(profile_id)
     profile_dict = load_profile(str(profile_id))
     print(profile_dict)
@@ -196,19 +217,21 @@ async def profile(request: Request, profile_id, user=Depends(manager)):
         "research_experience": titles_dict["title_1"],
         "education": titles_dict["title_2"],
         "contact_details": titles_dict["title_3"],
-        "title": articles_dict["title"],
+        "title_articles": articles_dict["title_articles"],
         "authors": articles_dict["authors"],
         "abstract": articles_dict["abstract"],
-        "user": user,
+        # "user": user,
     }
     return templates.TemplateResponse("profile.html", context)
 
 @app.get("/my-account", response_class=HTMLResponse)
-async def my_account(request: Request, user=Depends(manager)):
+async def my_account(request: Request, 
+                     # user=Depends(manager)
+                     ):
     cookie_value = request.cookies.get("access_token")
     print(cookie_value)
-    email = load_session(token=cookie_value)
-    user = load_user(email)
+    # email = load_session(token=cookie_value)
+    user = load_user()
     articles_dict = return_article()
     titles_dict = return_titles()
     context = {
@@ -220,10 +243,10 @@ async def my_account(request: Request, user=Depends(manager)):
         "research_experience": titles_dict["title_1"],
         "education": titles_dict["title_2"],
         "contact_details": titles_dict["title_3"],
-        "title": articles_dict["title"],
+        "title_articles": articles_dict["title_articles"],
         "authors": articles_dict["authors"],
         "abstract": articles_dict["abstract"],
-        "user": user,
+        # "user": user,
     }
     return templates.TemplateResponse("my_account.html", context)
 
@@ -266,7 +289,7 @@ async def format_markdown(
         return HTMLResponse(content="", status_code=200)
 
 
-@app.post("/submit-article", response_class=HTMLResponse)
+@app.put("/submit-article", response_class=HTMLResponse)
 async def submit_article(
     request: Request,
 
@@ -276,7 +299,7 @@ async def submit_article(
     save_user_articles(title, search)
     context = {
         "request": request,
-        "title": title,
+        "title_articles": title,
         "search": search
         }
     print(title, search)
