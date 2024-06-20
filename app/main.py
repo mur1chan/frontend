@@ -1,4 +1,3 @@
-
 from fastapi import Cookie, Depends, FastAPI, Form, HTTPException, Header, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
@@ -144,9 +143,10 @@ async def register(request: Request):
 
 
 @app.get("/home", response_class=HTMLResponse)
-async def home(request: Request, 
-               # user=Depends(manager)
-               ):
+async def home(
+    request: Request,
+    # user=Depends(manager)
+):
     articles_dict = return_article()
     context = {
         "request": request,
@@ -156,6 +156,7 @@ async def home(request: Request,
     }
     return templates.TemplateResponse("home.html", context)
 
+
 @app.get("/richtext_editor", response_class=HTMLResponse)
 async def richtext_editor(request: Request):
     return templates.TemplateResponse("richtext_editor.html", {"request": request})
@@ -164,32 +165,32 @@ async def richtext_editor(request: Request):
 @app.get("/search", response_class=HTMLResponse)
 async def search(request: Request):
     articles_dict = return_article()
+    publications = []
+    publications.append(articles_dict)
     titles_dict = return_titles()
     context = {
         "request": request,
         "research_experience": titles_dict["title_1"],
         "education": titles_dict["title_2"],
         "contact_details": titles_dict["title_3"],
-        "title": articles_dict["title_articles"],
-        "authors": articles_dict["authors"],
-        "abstract": articles_dict["abstract"],
+        "publications": publications
     }
     return templates.TemplateResponse("search.html", context=context)
 
+
 @app.post("/search-publications")
-async def search_publications(request: Request,
-                              search: str = Form(...)):
+async def search_publications(request: Request, search: str = Form(...)):
     try:
         publications = search_articles(search)
         print(type(publications))
-        context = {
-                "request": request,
-                "publications": publications
-                } 
-        return templates.TemplateResponse("/components/publication.html", context=context)
+        context = {"request": request, "publications": publications}
+        return templates.TemplateResponse(
+            "/components/publication.html", context=context
+        )
     except RequestValidationError as e:
         await request_validation_exception_handler(request, e)
         return HTMLResponse(content="", status_code=200)
+
 
 @app.get("/confirm_email", response_class=HTMLResponse)
 async def confirm_email(request: Request, email: str):
@@ -199,13 +200,18 @@ async def confirm_email(request: Request, email: str):
 
 
 @app.get("/profile/{profile_id}", response_class=HTMLResponse)
-async def profile(request: Request, profile_id, 
-                  # user=Depends(manager)
-                  ):
+async def profile(
+    request: Request,
+    profile_id,
+    # user=Depends(manager)
+):
     print(profile_id)
     profile_dict = load_profile(str(profile_id))
     print(profile_dict)
+
     articles_dict = return_article()
+    publications = []
+    publications.append(articles_dict)
     titles_dict = return_titles()
     context = {
         "request": request,
@@ -216,17 +222,18 @@ async def profile(request: Request, profile_id,
         "research_experience": titles_dict["title_1"],
         "education": titles_dict["title_2"],
         "contact_details": titles_dict["title_3"],
-        "title_articles": articles_dict["title_articles"],
-        "authors": articles_dict["authors"],
-        "abstract": articles_dict["abstract"],
+        "publications": publications
         # "user": user,
     }
     return templates.TemplateResponse("profile.html", context)
+
+
 # TODO
 @app.get("/my-account", response_class=HTMLResponse)
-async def my_account(request: Request, 
-                     # user=Depends(manager)
-                     ):
+async def my_account(
+    request: Request,
+    # user=Depends(manager)
+):
     cookie_value = request.cookies.get("access_token")
     print(cookie_value)
     # email = load_session(token=cookie_value)
@@ -245,14 +252,17 @@ async def my_account(request: Request,
         "research_experience": titles_dict["title_1"],
         "education": titles_dict["title_2"],
         "contact_details": titles_dict["title_3"],
-        "publications": publications
+        "publications": publications,
         # "user": user,
     }
     return templates.TemplateResponse("my_account.html", context)
 
+
 """
 THIS IS AN EXAMPLE HOW TO USE HTMX WITH FASTAPI
 """
+
+
 @app.get("/htmx", response_class=HTMLResponse)
 async def htmx(request: Request):
     return templates.TemplateResponse("htmx_test.html", {"request": request})
@@ -275,6 +285,7 @@ async def htmx_get_fn(request: Request):
     }
     return components.TemplateResponse("result.html", context)
 
+
 @app.post("/format-markdown", response_class=HTMLResponse)
 async def format_markdown(
     request: Request,
@@ -292,21 +303,17 @@ async def format_markdown(
 @app.put("/submit-article", response_class=HTMLResponse)
 async def submit_article(
     request: Request,
-
     title: str = Form(...),
     search: str = Form(...),
 ):
     save_user_articles(title, search)
-    context = {
-        "request": request,
-        "title_articles": title,
-        "search": search
-        }
+    context = {"request": request, "title_articles": title, "search": search}
     print(title, search)
-    # return templates.TemplateResponse("editor.html", context=context) 
+    # return templates.TemplateResponse("editor.html", context=context)
+
 
 @app.get("/editor", response_class=HTMLResponse)
-async def editor(request: Request): 
+async def editor(request: Request):
     scope = request.scope["htmx"]
     # print(scope.target)
     # print(scope.current_url)
@@ -325,6 +332,7 @@ async def settings(request: Request, user=Depends(manager)):
     context = {"request": request, "email": session_state}
 
     return templates.TemplateResponse("settings.html", context, status_code=200)
+
 
 @app.get("/articles", response_class=HTMLResponse)
 async def articles(request: Request):
