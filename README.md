@@ -107,5 +107,3 @@ Die folgenden Haupttechnologien und -bibliotheken werden in diesem Projekt verwe
 
 Dieses Projekt ist unter der MIT-Lizenz lizenziert. Weitere Informationen finden Sie in der `LICENSE`-Datei.
 ```
-
-Feel free to customize this README to better fit your project's specifics.
