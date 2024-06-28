@@ -98,9 +98,10 @@ Die folgenden Haupttechnologien und -bibliotheken werden in diesem Projekt verwe
 
 ## Mitwirkende
 
-- **Abdul Rahman El Chatleh** (Projektleiter)
-- **Sevde Kasapoglu**
-- **Dennis Bremer**
+- **Abdul C** (Projektleiter)
+- **Sevde K**
+- **Dennis B**
+- **Angel A**
 
 ## Lizenz
 
