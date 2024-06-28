@@ -3,6 +3,7 @@
 ## Projektübersicht
 
 Das Open Science Portal ist eine zentrale Plattform für Wissenschaftler und Forscher, um Forschungsergebnisse, Datensätze, Artikel, Publikationen und Projekte effizient zu teilen und zu verwalten. Diese Repository enthält den Quellcode für das Frontend der Plattform, das mit React entwickelt wurde.
+Dies ist ein Projekt von Studenten. 
 
 ## Inhaltsverzeichnis
 
