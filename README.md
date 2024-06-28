@@ -1,41 +1,48 @@
-# **THIS REPOSITORY IS HEAVILY IN CHANGE SO PLEASE DO NOT MIND THE BOILERPLATE**
+# Open Science Portal Frontend
 
-# about this project
-this is currently a university project. it's an open source platform (similar to research gate), where people can write and share their research papers. 
+## Projektübersicht
 
-# background of the project
-I'm a backend and software developer with a focus on logic, mainly using Python and Rust (I use Rust, by the way). While I enjoy backend development, frontend development with HTML, CSS, and JavaScript has always been challenging for me.
+Das Open Science Portal ist eine zentrale Plattform für Wissenschaftler und Forscher, um Forschungsergebnisse, Datensätze, Artikel, Publikationen und Projekte effizient zu teilen und zu verwalten. Diese Repository enthält den Quellcode für das Frontend der Plattform, das mit React entwickelt wurde.
 
-I've had several unsuccessful attempts at learning frontend development, mainly because of my difficulties with JavaScript. Modern frontend frameworks like React and Vue are powerful but too complex for my taste. Additionally, I didn't like the idea of relying heavily on the client side for processing and storage.
+## Inhaltsverzeichnis
 
-Even though I have experience with FastAPI and templating, I felt my frontends lacked dynamic features and aesthetic appeal. My ideal frontend should look good, be dynamic, and not take too long to develop.
+- [Installation](#installation)
+- [Verwendung](#verwendung)
+- [Projektstruktur](#projektstruktur)
+- [Technologien](#technologien)
+- [Mitwirkende](#mitwirkende)
+- [Lizenz](#lizenz)
 
-When I had the chance to explore this area more deeply, I gave it another try. I attempted to work with JavaScript again, but it didn't work out. So, I continued searching for the right tools—and I found them.
+## Installation
 
-To make the website dynamic, I use htmx (htmx mentioned), and for the design, I rely on TailwindCSS with the daisyUI plugin. This combination allowed my team and me to create a user-friendly, aesthetically pleasing website, without relying on JavaScript, and with both style and dynamic interaction handled seamlessly.
+### Voraussetzungen
 
-## Screenshots of the current state
-<details>
-  <summary>
-     main page
-  </summary>
- PLACEHOLDER
-</details>
+Stellen Sie sicher, dass die folgenden Softwarekomponenten auf Ihrem System installiert sind:
 
-# how to use it yourself
+- Node.js (Version 14 oder höher)
+- npm (Node Package Manager)
 
-REQUIREMENTS:
-- python and pip) is installed
+### Schritte zur Installation
 
-clone the repo or download it as a zip file
+1. Klonen Sie das Repository:
+    ```bash
+    git clone https://github.com/mur1chan/frontend.git
+    ```
+
+2. Navigieren Sie in das Projektverzeichnis:
+    ```bash
+    cd frontend
+    ```
+
+3. Installieren Sie die Abhängigkeiten:
+    ```bash
+    npm install
+    ```
+
+## Verwendung
+
+### Entwicklung
+
+Starten Sie die Entwicklungsumgebung mit:
 ```bash
-git clone https://github.com/mur1chan/frontend.git
-```
-
-after that open the repository in your code editor or terminal and run the following commands:
-
-```bash
-python -m venv .venv
-source .venv/bin/activate
-uvicorn app.main:app --reload --host "localhost"
-```
+npm start
